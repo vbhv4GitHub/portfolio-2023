@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import Title from 'components/SEO/Title';
 import Header from 'components/Layout/Header';
 import Text from 'components/UI/MuiComponents/Text';
 import { allPosts, Post } from '.contentlayer/generated';
 
-const MainLayout = dynamic(() => import('components/Layout/MainLayout'));
 const PaginatedCards = dynamic(() => import('components/UI/PaginatedCards/PaginatedCards'));
 
 type Props = { posts: Post[] };
@@ -31,13 +31,12 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
 
   const filteredPosts = useMemo(filterPostsBySearchTerm, [posts, searchTerm]);
   return (
-    <MainLayout title="Blog">
-      <>
-        <Header>{searchTerm ? `Search results for "${searchTerm}"` : `Blog Posts`}</Header>
-        {filteredPosts.length === 0 && searchTerm && <Text sx={{ my: 5 }}> No results!! Try another term.</Text>}
-        <PaginatedCards posts={filteredPosts} />
-      </>
-    </MainLayout>
+    <>
+      <Title title={searchTerm ? 'Search Results' : 'Blog Posts'} />
+      <Header>{searchTerm ? `Search results for "${searchTerm}"` : `Blog Posts`}</Header>
+      {filteredPosts.length === 0 && searchTerm && <Text sx={{ my: 5 }}> No results!! Try another term.</Text>}
+      <PaginatedCards posts={filteredPosts} />
+    </>
   );
 };
 

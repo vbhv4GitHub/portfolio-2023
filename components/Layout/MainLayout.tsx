@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import Navbar from 'components/Layout/Navbar';
 import { Montserrat } from '@next/font/google';
@@ -15,12 +14,9 @@ const montserrat = Montserrat({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
-type Props = {
-  title?: string;
-  children: React.ReactNode;
-};
+type Props = { children: React.ReactNode };
 
-const MainLayout = ({ children, title }: Props) => {
+const MainLayout = ({ children }: Props) => {
   const [isWindow, setIsWindow] = useState(false);
 
   useEffect(() => {
@@ -29,9 +25,6 @@ const MainLayout = ({ children, title }: Props) => {
 
   return (
     <Stack className={montserrat.className}>
-      <Head>
-        <title>{`${title ? title + ' | ' : ''}vbhv4WebDev`}</title>
-      </Head>
       <Navbar />
       <Container maxWidth="xl" sx={{ py: 10, minHeight: '90vh' }}>
         {children}

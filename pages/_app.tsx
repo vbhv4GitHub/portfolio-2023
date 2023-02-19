@@ -4,8 +4,10 @@ import dynamic from 'next/dynamic';
 import type { AppProps } from 'next/app';
 import { CssBaseline } from '@mui/material';
 import { CacheProvider } from '@emotion/react';
+import { useLiveReload } from 'next-contentlayer/hooks';
 import createEmotionCache from 'utils/createEmotionCache';
 import { EmotionCache, ThemeProvider } from '@emotion/react';
+import MainLayout from 'components/Layout/MainLayout';
 
 const Analytics = dynamic(() => import('components/SEO/Analytics'), { ssr: true });
 
@@ -16,13 +18,17 @@ interface MyAppProps extends AppProps {
 }
 
 function MyApp({ Component, pageProps, emotionCache = clientSideEmotionCache }: MyAppProps) {
+  useLiveReload();
+
   return (
     <>
       <Analytics />
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
           <CssBaseline>
-            <Component {...pageProps} />
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
           </CssBaseline>
         </ThemeProvider>
       </CacheProvider>
