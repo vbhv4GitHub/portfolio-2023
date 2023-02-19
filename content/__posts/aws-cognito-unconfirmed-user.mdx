@@ -1,8 +1,70 @@
 ---
-title: Cognito User Stuck in UNCONFIRMED state
-date: '2022-06-19'
-description: When a cognito user registers himself via a form on UI but doesn't verify the email or the phone the first time. When same user returns and registers himself and you make a signup request you get an error.
-tags: ['AWS', 'Cognito']
+title: Cognito User Stuck In UNCONFIRMED State
+date: 2022-06-19
+description: When a Cognito account is stuck in UNCOFIRMED state, cognito's signup and resendCode method throws an error.
+tags: ['AWS', 'Cognito', 'resendCode']
 ---
 
-Cupidatat do sit laborum laboris ea aliquip commodo in commodo laborum esse nulla in ullamco. Tempor dolore occaecat id consequat culpa id. Nostrud do commodo eu veniam mollit sunt pariatur ex adipisicing dolore in.
+Imagine that a user signs up for your application using an email address that they do not own, such as someoneElse@gmail.com. During the registration process, the user provides additional information such as their organization name and full name. A verification code is sent to the email address provided during registration. Obviously this user would not, or at least should not be able to complete registration as user won't be able to provide the verification code.
+
+Now, imagine that the true owner of the email address, someoneElse@gmail.com, tries to create an account for your application at a later date. However, when they attempt to register using their email address, an error is thrown by AWS Cognito:
+
+```json
+{
+  "type": "UsernameExistsException",
+  "message": "An account with the given email already exists."
+}
+```
+
+This can be a frustrating experience for the true owner of the email address, who may be unable to use your application as intended.
+
+There is one more situation that user may face in your application related to the same problem.
+
+A user may encounter a bug in your application when user who has signed up but hasn't verified their account and has closed the app may not be able to sign up again using the same account. This is because the user account remains unconfirmed in AWS Cognito, and attempting to sign up again will result in an error message stating that the account already exists.
+
+To resolve this issue, you may want to consider deleting unconfirmed user accounts that have been inactive for a certain period of time. This will allow users to sign up again using the same email address if they wish to do so.
+
+Unfortunately, AWS Cognito does not provide a built-in feature to delete unconfirmed user accounts automatically. However, you can use AWS Lambda, a serverless compute service, to write a function that deletes unconfirmed user accounts based on a specified time period.
+
+To do this, you can create an AWS Lambda function that uses the Cognito API to list all unconfirmed user accounts and check their creation date. You can then delete any unconfirmed user accounts that have been inactive for a specified amount of time.
+
+By implementing this solution, you can ensure that your users are able to sign up for your application using the same email address, even if they have closed the app before verifying their account.
+
+There is one more solution possible for this problem which I implemented on one of my project. It may not sound appropriate to you but might just do the job in a better way than deleting the Congito account itself.
+
+When a user tries to signup on your app and if you get the `UsernameExistsException` error, you can check if the user's account is in UNCOFIRMED state or not.
+
+The below example is for when users are to create account using phone number instead of email address, but the same can be applied for email address accounts as well.
+
+```ts
+import { Auth } from 'aws-amplify';
+import AWS, { CognitoIdentityServiceProvider } from 'aws-sdk';
+
+const provider = new AWS.CognitoIdentityServiceProvider();
+
+const response = await provider
+  .listUsers({
+    UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
+    Filter: `phone_number = "${phoneNumber}"`,
+  })
+  .promise();
+
+const status = response.Users[0].Attributes?.find((attribute) => {
+  return attribute.Name === 'phone_number_verified';
+})?.Value;
+
+verificationStatus = status && status === 'true';
+
+if (verificationStatus) {
+  throw new Error('Something went wrong');
+} else {
+  // user's phone number
+  await Auth.resendSignup('+911234567890');
+}
+```
+
+This will send user a new verification code that the user can use to confirm account and then login successfully.
+
+PS: If you're sending the verification code to a completely new user, you may want to be sure of updating any of their attributes in Cognito if required. Or else, the new user's cognito account will have some of the attributes from the previous user who attempted to singup using a wrong email address or phone number.
+
+Hope it was helpful. Thank you.
