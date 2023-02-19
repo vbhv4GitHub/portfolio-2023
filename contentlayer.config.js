@@ -1,3 +1,4 @@
+import rehypeHighlight from 'rehype-highlight';
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 
 export const Post = defineDocumentType(() => ({
@@ -22,4 +23,5 @@ export default makeSource({
   contentDirPath: 'content',
   onUnknownDocuments: 'skip-ignore',
   documentTypes: [Post],
+  mdx: { rehypePlugins: [rehypeHighlight] },
 });
