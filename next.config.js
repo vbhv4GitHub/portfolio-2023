@@ -5,7 +5,7 @@ const nextWithContentLayer = withContentlayer({
   reactStrictMode: true,
   swcMinify: true,
   productionBrowserSourceMaps: true,
-  images: { formats: ['image/avif', 'image/webp'] },
+  images: { unoptimized: true, formats: ['image/avif', 'image/webp'] },
 });
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
