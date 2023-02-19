@@ -1,12 +1,19 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import Navbar from 'components/Layout/Navbar';
+import { Montserrat } from '@next/font/google';
 import { Container, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 // Dynamic imports
-const Navbar = dynamic(() => import('components/Layout/Navbar'));
 const Footer = dynamic(() => import('components/Layout/Footer'));
 const ScrollToTop = dynamic(() => import('components/Layout/ScrollToTop'));
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
 
 type Props = {
   title?: string;
@@ -15,16 +22,15 @@ type Props = {
 
 const MainLayout = ({ children, title }: Props) => {
   const [isWindow, setIsWindow] = useState(false);
-  const titleString = title ? `${title} |` : null;
 
   useEffect(() => {
     if (typeof window !== 'undefined') setIsWindow(true);
   }, []);
 
   return (
-    <Stack>
+    <Stack className={montserrat.className}>
       <Head>
-        <title>{`${titleString} vbhv4WebDev`}</title>
+        <title>{`${title ? title + ' | ' : ''}vbhv4WebDev`}</title>
       </Head>
       <Navbar />
       <Container maxWidth="xl" sx={{ py: 10, minHeight: '90vh' }}>
