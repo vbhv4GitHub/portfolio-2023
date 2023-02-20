@@ -3,7 +3,6 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import Title from 'components/SEO/Title';
 import Header from 'components/Layout/Header';
-import 'highlight.js/styles/atom-one-dark.css';
 import { allPosts, Post } from '.contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import { Box, Chip, Stack, Container } from '@mui/material';
