@@ -1,11 +1,13 @@
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
   plugins: [
-    process.env.NODE_ENV === 'production' ? 'autoprefixer' : null,
-    process.env.NODE_ENV === 'production' ? 'cssnano' : null,
     'tailwindcss',
+    ['cssnano', isProduction ? {} : false],
+    ['autoprefixer', isProduction ? {} : false],
     [
       '@fullhuman/postcss-purgecss',
-      process.env.NODE_ENV === 'production'
+      isProduction
         ? {
             // the paths to all template files
             content: ['./pages/**/*', './components/**/*'],

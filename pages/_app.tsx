@@ -1,13 +1,14 @@
 import theme from 'theme';
 import 'styles/globals.css';
 import dynamic from 'next/dynamic';
+import 'styles/vs-code-dark-plus.css';
 import type { AppProps } from 'next/app';
 import { CssBaseline } from '@mui/material';
 import { CacheProvider } from '@emotion/react';
+import MainLayout from 'components/Layout/MainLayout';
 import { useLiveReload } from 'next-contentlayer/hooks';
 import createEmotionCache from 'utils/createEmotionCache';
 import { EmotionCache, ThemeProvider } from '@emotion/react';
-import MainLayout from 'components/Layout/MainLayout';
 
 const Analytics = dynamic(() => import('components/SEO/Analytics'), { ssr: true });
 
