@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  content: ['pages/**/*', 'components/**/*'],
-  future: { removeDeprecatedGapUtilities: true, purgeLayersByDefault: true },
-  purge: false,
-  theme: { extend: { typography: { DEFAULT: { css: { pre: {} } } } } },
+  purge: true,
   variants: {},
+  theme: { extend: {} },
+  content: ['pages/**/*', 'components/**/*'],
   plugins: [require('@tailwindcss/typography')],
+  future: { removeDeprecatedGapUtilities: true, purgeLayersByDefault: true },
 };
