@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
@@ -36,7 +36,7 @@
     "next-sitemap": "^3.1.52",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "rehype-highlight": "^6.0.0"
+    "rehype-prism-plus": "^1.5.1"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
@@ -44,6 +44,8 @@
     "@types/lodash": "^4.14.191",
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",
+    "autoprefixer": "^10.4.13",
+    "cssnano": "^5.1.15",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "eslint-plugin-unused-imports": "^2.0.0",

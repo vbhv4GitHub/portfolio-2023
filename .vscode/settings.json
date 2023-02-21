@@ -7,5 +7,5 @@
     "extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"]
   },
   "eslint.validate": ["markdown", "javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "conventionalCommits.scopes": ["project", "deps", "seo", "ci/cd", "posts"]
+  "conventionalCommits.scopes": ["project", "deps", "seo", "ci/cd", "posts", "build"]
 }

@@ -2,8 +2,8 @@
 const { withContentlayer } = require('next-contentlayer');
 
 const nextWithContentLayer = withContentlayer({
-  reactStrictMode: true,
   swcMinify: true,
+  reactStrictMode: true,
   productionBrowserSourceMaps: true,
   images: { unoptimized: true, formats: ['image/avif', 'image/webp'] },
 });
