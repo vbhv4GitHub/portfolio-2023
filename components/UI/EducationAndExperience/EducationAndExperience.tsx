@@ -90,7 +90,7 @@ export default function EducationAndExperience() {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineConnector />
-          <TimelineDot color="primary">
+          <TimelineDot color="success">
             <WorkOutlineOutlinedIcon />
           </TimelineDot>
           <TimelineConnector sx={{ opacity: 0 }} />
