@@ -13,9 +13,9 @@ const Home: NextPage = () => {
       <Title title="Home" />
       <Header>Brief Introduction</Header>
       <BriefIntroduction />
-      <Header mt={5}>Skills</Header>
+      <Header mt={21}>Skills</Header>
       <Skills />
-      <Header mt={5}>Education &amp; Experience</Header>
+      <Header mt={21}>Education &amp; Experience</Header>
       <EducationAndExperience />
     </>
   );
