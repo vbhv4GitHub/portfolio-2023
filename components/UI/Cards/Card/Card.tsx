@@ -14,9 +14,9 @@ const CardSubheader = ({ date }: { date: string }) => {
   return (
     <IconWithText
       icon={<EventIcon />}
-      text={dayjs(date).format('MMMM D, YYYY')}
-      typographyProps={{ variant: 'subtitle2' }}
       stackProps={{ sx: { mt: 2 } }}
+      text={dayjs(date).format('MMMM D, YYYY')}
+      typographyProps={{ variant: 'subtitle2', color: 'secondary' }}
     />
   );
 };
@@ -26,9 +26,10 @@ const Card = (post: Post) => {
     <MuiCard sx={{ maxWidth: 'xl' }} elevation={3}>
       <CardHeader
         component={Link}
-        className="hover:text-blue-300"
         title={post.title}
         href={`/posts/${post.slug}`}
+        className="hover:text-blue-300"
+        color={theme.palette.primary.main}
         subheader={<CardSubheader date={post.date} />}
         titleTypographyProps={{ fontSize: 18, fontWeight: 600, noWrap: true }}
       />
@@ -38,10 +39,10 @@ const Card = (post: Post) => {
           variant="body1"
           color="text.secondary"
           sx={{
-            display: '-webkit-box',
             overflow: 'hidden',
-            WebkitBoxOrient: 'vertical',
             WebkitLineClamp: 3,
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
           }}
         >
           {post.description}

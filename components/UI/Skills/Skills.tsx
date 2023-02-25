@@ -5,23 +5,23 @@ export default function Skills() {
     <Stack gap={2} px={{ xs: 0, sm: '10%', md: '25%' }}>
       <Stack gap={1}>
         <Typography variant="body1"> HTML </Typography>
-        <LinearProgress variant="determinate" color="primary" value={92} />
+        <LinearProgress variant="determinate" color="success" value={92} />
       </Stack>
       <Stack gap={1}>
         <Typography variant="body1"> CSS </Typography>
-        <LinearProgress variant="determinate" color="primary" value={88} />
+        <LinearProgress variant="determinate" color="success" value={88} />
       </Stack>
       <Stack gap={1}>
         <Typography variant="body1"> Typescript </Typography>
-        <LinearProgress variant="determinate" color="primary" value={80} />
+        <LinearProgress variant="determinate" color="success" value={80} />
       </Stack>
       <Stack gap={1}>
         <Typography variant="body1"> ReactJS </Typography>
-        <LinearProgress variant="determinate" color="primary" value={78} />
+        <LinearProgress variant="determinate" color="success" value={78} />
       </Stack>
       <Stack gap={1}>
         <Typography variant="body1"> HapiJS </Typography>
-        <LinearProgress variant="determinate" color="primary" value={82} />
+        <LinearProgress variant="determinate" color="success" value={82} />
       </Stack>
     </Stack>
   );
