@@ -18,7 +18,7 @@ export default function EducationAndExperience() {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineConnector sx={{ opacity: 0 }} />
-          <TimelineDot color="grey">
+          <TimelineDot color="secondary">
             <SchoolOutlinedIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -36,7 +36,7 @@ export default function EducationAndExperience() {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineConnector />
-          <TimelineDot color="grey">
+          <TimelineDot color="secondary">
             <SchoolOutlinedIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -54,7 +54,7 @@ export default function EducationAndExperience() {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineConnector />
-          <TimelineDot color="grey">
+          <TimelineDot color="secondary">
             <WorkOutlineOutlinedIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -72,7 +72,7 @@ export default function EducationAndExperience() {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineConnector />
-          <TimelineDot color="grey">
+          <TimelineDot color="secondary">
             <WorkOutlineOutlinedIcon />
           </TimelineDot>
           <TimelineConnector />

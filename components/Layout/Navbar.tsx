@@ -58,6 +58,7 @@ const Navbar = () => {
           <a target="_blank" rel="noreferrer" href="https://github.com/vbhv4GitHub" aria-label="Github profile">
             <Button
               variant="outlined"
+              color="warning"
               startIcon={<GithubIcon className="animate-bounce" />}
               sx={{ my: { xs: 1, sm: 1, md: 0 }, minWidth: 120 }}
             >

@@ -14,7 +14,7 @@ const Header = ({ children, ...rest }: Props) => {
       <Heading variant="h5" {...rest} color={theme.palette.primary.main}>
         {children}
       </Heading>
-      <MuiDivider />
+      <MuiDivider sxProps={{ width: 480, mx: 'auto' }} />
     </>
   );
 };
