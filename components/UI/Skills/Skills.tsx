@@ -43,6 +43,11 @@ const skills = [
     percentage: 81,
   },
   {
+    name: 'Postgres',
+    logo: '/assets/logos/postgres.png',
+    percentage: 81,
+  },
+  {
     name: 'Tailwind',
     logo: '/assets/logos/tailwind.png',
     percentage: 65,
