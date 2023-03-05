@@ -11,10 +11,10 @@ type Props = {
 const Header = ({ children, ...rest }: Props) => {
   return (
     <>
-      <Heading variant="h5" {...rest} color={theme.palette.primary.main}>
+      <Heading variant="h4" {...rest} color={theme.palette.primary.main}>
         {children}
       </Heading>
-      <MuiDivider sxProps={{ width: 480, mx: 'auto' }} />
+      <MuiDivider sxProps={{ width: 320, mx: 'auto' }} />
     </>
   );
 };

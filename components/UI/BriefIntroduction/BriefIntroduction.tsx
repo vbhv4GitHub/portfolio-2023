@@ -1,17 +1,31 @@
+import { Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import theme from 'theme';
 
 export default function BriefIntroduction() {
   return (
-    <>
-      <Typography variant="body1" sx={{ px: { md: '25%' } }}>
-        Hello! My name is Vaibhav Yadav, and I am an India-based full stack web developer. If I am not working on a
-        client project, I am learning advance typescript tricks, playing chess or writing flash fiction stories for fun.
+    <Container sx={{ my: 10 }}>
+      <Typography variant="h2" fontWeight={700} sx={{ px: { md: '25%' } }}>
+        Hi, I&apos;m&nbsp;
+        <Typography
+          variant="h2"
+          fontWeight={700}
+          component="span"
+          display="inline"
+          color={theme.palette.secondary.main}
+        >
+          Vaibhav
+        </Typography>
+      </Typography>
+      <Typography variant="h5" fontWeight={600} color={theme.palette.primary.main} sx={{ px: { md: '25%' } }}>
+        A Fullstack Web Developer
       </Typography>
       <Typography variant="body1" sx={{ px: { md: '25%' }, mt: 2 }}>
-        I&apos;ve over an year&apos;s hands-on experience working on Frontend and Backend for a fintech product. My
-        current tech stack is ReactJS on frontend with Hapi & Postgres with TypeORM on backend. I&apos;ve also spent
-        fair share of time learning NextJS, Express, MongoDB and Prisma.
+        &emsp;&emsp;I&apos;ve almost two year&apos;s hands-on experience working on a fin-tech application. My current
+        tech stack includes React with MaterialUI on frontend with Hapi, Postgres with TypeORM on backend. I&apos;ve
+        also spent fair share of time working with NextJS, Tailwind, Express, MongoDB & Prisma on some of my pet
+        projects.
       </Typography>
-    </>
+    </Container>
   );
 }

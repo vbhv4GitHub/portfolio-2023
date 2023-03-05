@@ -11,7 +11,6 @@ const Home: NextPage = () => {
   return (
     <>
       <Title title="Home" />
-      <Header>Brief Introduction</Header>
       <BriefIntroduction />
       <Header mt={21}>Skills</Header>
       <Skills />
