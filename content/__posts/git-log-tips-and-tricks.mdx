@@ -1,0 +1,129 @@
+---
+title: Git log tips & tricks
+date: 2023-03-05
+description: Some useful commands when playing with git logs
+tags: ['git', 'gitlog', 'gitbash', 'github']
+---
+
+## Remove Merge Commits
+
+To view commit history without merge commit we can use the option `--no-merges`.
+
+```bash
+git log --no-merges
+```
+
+## Formatting
+
+The commit logs can be formatted using the option `--format`.
+
+Here are some of the examples how you can format your commit history logs.
+
+```bash
+git log --pretty=oneline
+```
+
+```bash
+git log --pretty=format:"%h - %s %an, %cr"
+```
+
+This one if my favorite of all the ways to format my git logs. You'll know why when you try this out.
+
+```bash
+git log --pretty=format:'%Cred%h%Creset - %s [%C(yellow)%an%Creset] %Cgreen(%cr)%Creset'
+```
+
+To learn more about using colors with git logs check [Git commit history- Customize the output with colors](https://dev.to/robertobutti/git-commit-history-customize-the-output-with-colors-lcc)
+
+## Comparing Branches or Tags
+
+Often one can find oneself in dire need of getting comparision git logs between two branches, or a branch and tag or simply two different tags.
+
+Here's some of the example to achieve that goal.
+
+```bash
+git log --pretty=format:"%h - %s %an, %cr" production..main --
+```
+
+Will compare the branches `production` & `master`.
+
+```bash
+git log --pretty=format:"%h - %s %an, %cr" $(git describe --tags --abbrev=0)..HEAD --
+```
+
+To compare your current `local branch's head` against the `latest tag`.
+
+You might want to pull all the remote tags to your local before running the above command using:
+
+```bash
+git fetch --tags
+```
+
+## Filter By Author
+
+It can be achieved simply by using the `--author` option.
+
+```bash
+git log --pretty=format:"%h - %s %an, %cr" --author=thealchemist
+```
+
+**NOTE:** `thealchemist` in above command is the github username of the author, and the command works even when you provide it partial string like `thealche`.
+
+### Bonus
+
+You can use `git shortlog` instead of `git log` to group all the commits by authors, usint the `--group` option. The option does not work with `git log`.
+
+```bash
+git shortlog --pretty=format:"%h - %s %an, %cr" --group=author
+```
+
+Learn more about [Git Shortlog](https://git-scm.com/docs/git-shortlog).
+
+## Limiting
+
+The most easiest way to limit logs is to use the `-<n>` option, which is a placeholder or a template for `-5`.
+
+```bash
+git log -5
+```
+
+Will only show you only five recent commits.
+
+Other than that you can also limit the logs using dates or a `grep string` using the option `--grep`.
+
+```bash
+git log --pretty=format:"%h - %s %an, %cr" --since="2022-12-31" --before="2023-01-31"
+```
+
+Will show you logs for the month of January 2023.
+
+```bash
+git log --pretty=format:"%h - %s %an, %cr" --since=4.weeks
+```
+
+Can be used to get logs for last four weeks.
+
+```bash
+git log --pretty=format:"%h - %s %an, %cr" --grep="bump"
+```
+
+It will show only those commits which have the string `bump` in them.
+
+## Bonus
+
+If you've ever noticed, by default git pipes all output through a pager so one can only see one page of log output at a time.
+
+If you want to view all the logs at once and skip the pagination you can use:
+
+```bash
+git --no-pager log --pretty=format:"%h - %s %an, %cr
+```
+
+**NOTE:** The `--no-pager` goes before the `log` in your command.
+
+And, if you want to navigate between the pages when viewing the logs you can use `Space` key for the next page & `b` to go back one page.
+
+For more in depth understanding of the git log visit the link below:
+[Git Basics: Viewing the Commit History](https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History)
+
+Hope it helps. Thank you.
