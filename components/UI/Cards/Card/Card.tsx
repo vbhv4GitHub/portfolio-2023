@@ -23,7 +23,7 @@ const CardSubheader = ({ date }: { date: string }) => {
 
 const Card = (post: Post) => {
   return (
-    <MuiCard sx={{ maxWidth: 'xl' }} elevation={3}>
+    <MuiCard sx={{ maxWidth: 'md', mx: 'auto' }} elevation={3}>
       <CardHeader
         component={Link}
         title={post.title}
