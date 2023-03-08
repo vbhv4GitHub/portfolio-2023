@@ -1,13 +1,12 @@
+import _ from 'lodash';
 import { useMemo } from 'react';
-import dynamic from 'next/dynamic';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Title from 'components/SEO/Title';
 import Header from 'components/Layout/Header';
 import Text from 'components/UI/MuiComponents/Text';
 import { allPosts, Post } from '.contentlayer/generated';
-
-const PaginatedCards = dynamic(() => import('components/UI/PaginatedCards/PaginatedCards'));
+import PaginatedCards from 'components/UI/PaginatedCards/PaginatedCards';
 
 type Props = { posts: Post[] };
 
@@ -45,5 +44,7 @@ export default Home;
 export async function getStaticProps() {
   const posts: Post[] = allPosts.sort((p1, p2) => new Date(p2.date).getTime() - new Date(p1.date).getTime());
 
-  return { props: { posts } };
+  const cleanedPosts = posts.map((post) => _.omit(post, ['body', '_raw']));
+
+  return { props: { posts: cleanedPosts } };
 }

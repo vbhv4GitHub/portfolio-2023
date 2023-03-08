@@ -1,10 +1,7 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
+import Grid from '@mui/material/Grid';
 import { Post } from 'contentlayer/generated';
-
-// Dynamic imports
-const Grid = dynamic(() => import('@mui/material/Grid'));
-const Card = dynamic(() => import('components/UI/Cards/Card/Card'));
+import Card from 'components/UI/Cards/Card/Card';
 
 type Props = { posts: Post[] };
 
