@@ -1,10 +1,11 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { Post } from 'contentlayer/generated';
+import Cards from 'components/UI/Cards/Cards';
+import { POSTS_PER_PAGE } from 'types/constants';
 import { Stack, Pagination, PaginationItem, PaginationProps } from '@mui/material';
 
 // Dynamic imports
-const Cards = dynamic(() => import('components/UI/Cards/Cards'));
 const ArrowBackIcon = dynamic(() => import('@mui/icons-material/ArrowBack'));
 const ArrowForwardIcon = dynamic(() => import('@mui/icons-material/ArrowForward'));
 
@@ -26,14 +27,13 @@ const MuiPagination = (props: PaginationProps) => {
 const PaginatedCards = ({ posts }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [paginatedPosts, setPaginatedPosts] = useState<Post[]>(posts);
-  const postPerPage = 6;
-  const numberOfPages = Math.ceil(posts.length / postPerPage);
+  const numberOfPages = Math.ceil(posts.length / POSTS_PER_PAGE);
 
   useEffect(() => {
     let paginatedPosts: Post[] = [];
     if (numberOfPages > 1) {
       const pageIndex = currentPage - 1;
-      paginatedPosts = posts.slice(pageIndex * postPerPage, pageIndex * postPerPage + postPerPage);
+      paginatedPosts = posts.slice(pageIndex * POSTS_PER_PAGE, pageIndex * POSTS_PER_PAGE + POSTS_PER_PAGE);
       setPaginatedPosts(paginatedPosts);
     } else {
       setPaginatedPosts(posts);

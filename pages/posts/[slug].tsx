@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import dayjs from 'dayjs';
 import React from 'react';
 import dynamic from 'next/dynamic';
@@ -50,7 +51,10 @@ export default DetailedPost;
 
 export async function getStaticProps({ params }: any) {
   const post = allPosts.find((post) => post.slug === params.slug);
-  return { props: { post } };
+
+  const cleanedPost = _.omit(post, ['_raw']);
+
+  return { props: { post: cleanedPost } };
 }
 
 export async function getStaticPaths() {
