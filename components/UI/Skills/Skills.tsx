@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Grid, Typography } from '@mui/material';
+import { Grid, LinearProgress, Typography } from '@mui/material';
 
 const skills = [
   {
@@ -45,7 +45,7 @@ const skills = [
   {
     name: 'Postgres',
     logo: '/assets/logos/postgres.png',
-    percentage: 81,
+    percentage: 55,
   },
   {
     name: 'Tailwind',
@@ -61,20 +61,28 @@ const skills = [
 
 export default function Skills() {
   return (
-    <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2 }} sx={{ marginX: 'auto !important', maxWidth: 'sm' }}>
-      {skills.map((skill) => {
+    <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2 }} sx={{ marginX: 'auto !important', maxWidth: 'sm' }}>
+      {skills.map(({ name, logo, percentage }) => {
+        const color = percentage > 85 ? 'success' : percentage > 75 ? 'primary' : percentage > 60 ? 'warning' : 'error';
+
         return (
           <Grid
             item
             xs={4}
             sm={3}
-            key={skill.logo}
+            key={logo}
             style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
           >
-            <Image alt={skill.name} src={skill.logo} height={70} width={70} />
+            <Image alt={name} src={logo} height={55} width={55} />
             <Typography variant="body1" mb={2} mt={1}>
-              {skill.name}
+              {name}
             </Typography>
+            <LinearProgress
+              color={color}
+              value={percentage}
+              variant="determinate"
+              sx={{ height: 8, width: '100%', borderRadius: 5 }}
+            />
           </Grid>
         );
       })}
