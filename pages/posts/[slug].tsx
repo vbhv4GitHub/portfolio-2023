@@ -4,9 +4,10 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import Title from 'components/SEO/Title';
 import Header from 'components/Layout/Header';
+import { Box, Stack, Container } from '@mui/material';
 import { allPosts, Post } from '.contentlayer/generated';
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import { Box, Chip, Stack, Container } from '@mui/material';
+import TagCapsule from 'components/UI/MuiComponents/TagCapsule';
 import InternalLink from 'components/UI/InternalLink/InternalLink';
 import ExternalLink from 'components/UI/ExternalLink/ExternalLink';
 
@@ -35,8 +36,8 @@ const DetailedPost = ({ post }: Props) => {
       <Stack flexDirection="row" maxWidth="640px" gap={1} sx={{ mx: 'auto' }}>
         <LocalOfferOutlinedIcon />
         <Box>
-          {post.tags.map((tag: string) => (
-            <Chip label={tag} key={tag} sx={{ mr: 1 }} size="small" />
+          {post.tags.map((tag: string, idx: number) => (
+            <TagCapsule label={tag} href={`/blog/tag/${tag}`} key={idx} />
           ))}
         </Box>
       </Stack>

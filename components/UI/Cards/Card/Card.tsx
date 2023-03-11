@@ -3,7 +3,8 @@ import theme from 'theme';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { Post } from 'contentlayer/generated';
-import { Chip, Stack, CardHeader, CardContent, Card as MuiCard, Typography } from '@mui/material';
+import TagCapsule from 'components/UI/MuiComponents/TagCapsule';
+import { Stack, CardHeader, CardContent, Card as MuiCard, Typography } from '@mui/material';
 
 // Dynamic imports
 const EventIcon = dynamic(() => import('@mui/icons-material/Event'));
@@ -50,7 +51,7 @@ const Card = (post: Post) => {
         <Stack sx={{ mt: 2 }} flexDirection="row">
           <LocalOfferOutlinedIcon sx={{ color: theme.palette.text.secondary, mr: 1 }} />
           {post.tags.map((tag: string, idx: number) => (
-            <Chip label={tag} key={idx} sx={{ mr: 1, mb: 1 }} size="small" />
+            <TagCapsule label={tag} href={`/blog/tag/${tag}`} key={idx} />
           ))}
         </Stack>
       </CardContent>

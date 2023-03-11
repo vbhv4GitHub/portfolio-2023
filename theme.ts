@@ -39,6 +39,9 @@ const theme = createTheme(defaultTheme, {
       styleOverrides: {
         label: {
           color: defaultTheme.palette.primary.main,
+          ':hover': {
+            color: defaultTheme.palette.primary.light,
+          },
         },
       },
     },
