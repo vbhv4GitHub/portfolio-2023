@@ -11,7 +11,7 @@ const SearchBox = () => {
   const searchSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     Router.push({
-      pathname: '/blog',
+      pathname: '/search-results',
       query: { search: searchTerm },
     });
   };
