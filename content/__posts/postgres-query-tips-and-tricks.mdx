@@ -1,0 +1,93 @@
+---
+title: Postgres Query tips and tricks
+date: 2023-03-11
+description: Few tips & tricks when using postgres query to select a certain records.
+tags: [sql, 'posgres', 'postgresquery']
+---
+
+## Filter records based on datetime range
+
+We can treat a timestamp column just like an integer value, and if we've stored date or time as in a certain string format like `YYYY-MM-DD` then we can parse it into a timestamp integer value using the query below.
+
+```sql
+TO_DATE(DATE_OF_BIRTH, 'YYYY-MM-DD')
+```
+
+It'll return a regular timestamp value using the `DATE_OF_BIRTH` that can be treated as an integer.
+
+The below query will filter the users based on their date of birth and will return only users under 18.
+
+```sql
+SELECT
+  USER_ID,
+  DATE_OF_BIRTH
+FROM PUBLIC.USER
+WHERE (CURRENT_DATE - INTERVAL '18 years')::date < TO_DATE(T2.DATE_OF_BIRTH, 'YYYY-MM-DD');
+```
+
+## Derive a column from existing column
+
+It could be achieved using `CASE` clause. It is a conditional expression in PostgreSQL that allows you to return different results based on different conditions.
+
+**Syntax:**
+
+```sql
+CASE
+   WHEN condition1 THEN result1
+   WHEN condition2 THEN result2
+   WHEN condition3 THEN result3
+   ELSE default_result
+END
+```
+
+**Example:** The below query returns an additional derived column `Under 18` containing either `true` or `false` depending on date of birth.
+
+```sql
+SELECT T1.ID AS "Employee ID",
+	T1.FIRST_NAME AS "First Name",
+	T1.MIDDLE_NAME AS "Middle Name",
+	T1.LAST_NAME AS "Last Name",
+	T1.USER_ID AS "User ID",
+	T2.DATE_OF_BIRTH AS "Date of Birth",
+	CASE
+		WHEN (CURRENT_DATE - INTERVAL '18 years')::date < TO_DATE(T2.DATE_OF_BIRTH, 'YYYY-MM-DD')
+		THEN true
+		ELSE false
+	END AS "Under 18"
+FROM PUBLIC.EMPLOYEE T1
+FULL OUTER JOIN PUBLIC.USER T2 ON T1.USER_ID = T2.ID;
+```
+
+## Updating a JSON Object column
+
+To update a JSON object column in Postgres, you can use the `UPDATE` statement along with the `SET` clause and the `jsonb_set()` function.
+
+**Syntax:** jsonb_set function
+
+```sql
+jsonb_set(COLUMN_NAME, '{key}', '"Value"', BOOLEAN_CREATE_IF_MISSING)
+```
+
+Here's an example of how you can update a JSON object column named data in a table named my_table:
+
+```sql
+UPDATE PUBLIC.USER
+SET ADDRESS = jsonb_set(ADDRESS, '{city}', '"New York"', false)
+WHERE id = 1;
+```
+
+This query updates the value of `user.address.city` to `New York` for user with id 1.
+
+In jsonb_set function, the `BOOLEAN_CREATE_IF_MISSING` parameter is set to FALSE, so the `user.address.city` will be updated only when it already exists. The value defaults to `true` if it is not mentioned.
+
+```sql
+UPDATE PUBLIC.USER
+SET ADDRESS = jsonb_set(ADDRESS, '{city}', '"New York"', true)
+WHERE id = 1;
+```
+
+In this query the `user.address.city` will be created if it does not exist already, and it would be updated if it exists already.
+
+Learn more about [Working With Postgresql Jsonb](https://www.haselt.com/blog/working-with-postgresql-jsonb).
+
+Hope it helps. Thank you.
