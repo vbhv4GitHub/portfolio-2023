@@ -9,7 +9,7 @@ import MuiPagination from 'components/UI/MuiComponents/MuiPagination';
 
 type Props = { posts: Post[]; pageCount: number };
 
-const Blog: NextPage<Props> = ({ posts, pageCount }: Props) => {
+const BlogPage: NextPage<Props> = ({ posts, pageCount }: Props) => {
   return (
     <>
       <Title title="Blog Posts" />
@@ -22,16 +22,32 @@ const Blog: NextPage<Props> = ({ posts, pageCount }: Props) => {
   );
 };
 
-export default Blog;
+export default BlogPage;
 
-export async function getStaticProps() {
+export async function getStaticProps({ params }: { params: { page: string } }) {
   const posts: Post[] = allPosts.sort((p1, p2) => new Date(p2.date).getTime() - new Date(p1.date).getTime());
+
+  const pageNo = parseInt(params.page);
+  const idx = pageNo - 1;
+  const startIndex = idx * POSTS_PER_PAGE;
+  const endIndex = pageNo * POSTS_PER_PAGE;
 
   const pageCount = Math.ceil(allPosts.length / POSTS_PER_PAGE);
 
-  const rawPosts = posts.slice(0, POSTS_PER_PAGE);
+  const rawPosts = posts.slice(startIndex, endIndex);
 
   const filteredPosts = rawPosts.map((post) => _.omit(post, ['body', '_raw']));
 
   return { props: { posts: filteredPosts, pageCount } };
+}
+
+export async function getStaticPaths() {
+  const totalPageCount = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+  const pageIntoArray = Array.from(Array(totalPageCount).keys());
+
+  const paths = pageIntoArray.map((path) => {
+    return { params: { page: `${path + 1}` } };
+  });
+
+  return { paths, fallback: false };
 }
