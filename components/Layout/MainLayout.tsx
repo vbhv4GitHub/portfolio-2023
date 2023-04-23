@@ -1,9 +1,9 @@
 import dynamic from 'next/dynamic';
 import Navbar from 'components/Layout/Navbar';
-import { Montserrat } from '@next/font/google';
+import { Montserrat } from 'next/font/google';
 import { Container, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Source_Code_Pro } from '@next/font/google';
+import { Source_Code_Pro } from 'next/font/google';
 
 // Dynamic imports
 const Footer = dynamic(() => import('components/Layout/Footer'));
