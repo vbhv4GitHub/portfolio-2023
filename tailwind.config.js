@@ -7,6 +7,7 @@ module.exports = {
       typography: {
         DEFAULT: {
           css: {
+            fontFamily: 'Source Code Pro',
             'code::before': {
               content: 'none',
             },
@@ -17,7 +18,7 @@ module.exports = {
               fontSize: '1rem',
               fontWeight: 500,
               color: '#fef3c7',
-              fontFamily: 'Montserrat',
+              fontFamily: 'Source Code Pro',
             },
             a: {
               fontWeight: 500,
