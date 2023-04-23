@@ -1,0 +1,61 @@
+---
+title: Using react's i18next with MUI typography
+date: 2023-04-09
+description: Using i18next translation texts with Material UI's typography
+tags: ['react', 'mui', 'reactI18next', 'typography']
+---
+
+## Adding new lines with linebreaks
+
+### 1. Using "<br/>" tags
+
+```json
+{
+  "hello": {
+    "message": "Hello world <0/> Hello world"
+  }
+}
+```
+
+```typescript
+import { Trans } from 'react-i18next';
+import { Typography } from '@mui/material';
+
+<Typography variant="subtitle" mt={2}>
+  <Trans t={t} i18nKey="hello.message" components={[<br />]} />
+</Typography>;
+```
+
+The `<0/>` will be replaced by a `line break` during rendering with the first element passed in the `components` props array.
+
+### 2. Using "\n" in the translation texts
+
+```json
+{
+  "hello": {
+    "message": "Hello world \n Hello world"
+  }
+}
+```
+
+```typescript
+import { Trans } from 'react-i18next';
+import { Typography } from '@mui/material';
+
+<Typography variant="subtitle">
+  <Trans t={t} i18nKey="hello.message" />
+</Typography>;
+```
+
+This does not work. For it to work you need to pass the `preWhitespace` prop to the Typography component like below:
+
+```typescript
+import { Trans } from 'react-i18next';
+import { Typography } from '@mui/material';
+
+<Typography variant="subtitle" whiteSpace="pre-wrap">
+  <Trans t={t} i18nKey="hello.message" />
+</Typography>;
+```
+
+Hope it was helpful. Thank you.
