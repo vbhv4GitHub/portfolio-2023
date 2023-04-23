@@ -14,7 +14,7 @@ const defaultTheme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Montserrat',
+      'Source Code Pro',
       'Roboto',
       'sans-serif',
       'Arial',
