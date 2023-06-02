@@ -29,7 +29,7 @@
     "@next/bundle-analyzer": "^13.4.4",
     "contentlayer": "^0.3.1",
     "cross-env": "^7.0.3",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "next": "13.4.4",
     "next-contentlayer": "^0.3.1",
     "next-sitemap": "^4.1.3",
