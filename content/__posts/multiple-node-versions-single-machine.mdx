@@ -1,0 +1,39 @@
+---
+title: Use multiple node versions on single machine
+date: 2022-06-14
+description: How to use multiple node versions on signle windows machine.
+tags: ['nodejs', 'nvm']
+---
+
+### Install nvm
+
+Download (nvm-setup.exe)[https://github.com/coreybutler/nvm-windows/releases] ,follow the prompts to finish installation.
+
+Confirm nvm is installed.
+
+```bash
+nvm --version
+```
+
+### Install node versions
+
+```bash
+nvm install 18.16.0
+nvm install 16.16.0
+```
+
+### List node versions available
+
+```bash
+nvm list
+```
+
+### Use node version
+
+```bash
+nvm use 18.16.0
+```
+
+It's as simple as that.
+
+Hope it was helpful. Thank you.
