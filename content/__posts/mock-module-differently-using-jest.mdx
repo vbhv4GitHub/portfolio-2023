@@ -1,0 +1,67 @@
+---
+title: Mock a single module differently in a single test file using jest
+date: 2023-05-28
+description: Mocking a single module differently in a single test file using jest
+tags: ['test', 'jest', 'nodejs', 'javascript']
+---
+
+### Let's use an example
+
+Let's say we have a service, `XYZService` tha we want to mock differently in different tests cases.
+
+```ts
+// file: src/services/User/XYZService.ts
+export class XYZService {
+  constructor(private user: User) {}
+
+  public perform = async (): Promise<boolean> => 5 > 2;
+}
+```
+
+We'll be testing `ABCService` that uses `XYZService`.
+
+```ts
+// file: src/services/User/ABCService.ts
+export class ABCService {
+  constructor(private user: User) {}
+
+  public perform = async (): Promise<boolean> => {
+    const xyz = new XYZService(this.user);
+    return xyz.perform();
+  };
+}
+```
+
+Let's say we're writing test for a service, ABCService that uses `XYZService` and we want to mock it. We can do it like this:
+
+```ts
+// file: src/tests/ABCService.test.ts
+let mockXYZMethod = jest.fn().mockResolvedValue(true);
+
+jest.mock('../../src/services/User/XYZService', () => {
+  return {
+    XYZService: jest.fn().mockImplementation(() => ({
+      perform: jest.fn().mockImplementation(() => mockXYZMethod()),
+    })),
+  };
+});
+
+describe('ABC Service', () => {
+  it('lorem ipsum successfully when XYZ returns true', async () => {
+    const abc = new ABCService();
+    expect(await abc.perform()).toBeFalsy();
+  });
+
+  it('lorem ipsum successfully when XYZ returns false', async () => {
+    // changing the mock behavior for the XYZService's perform method
+    mockXYZMethod = jest.fn().mockResolvedValue(false);
+
+    const abc = new ABCService();
+    expect(await abc.perform()).toBeFalsy();
+  });
+});
+```
+
+Voila! it's done.
+
+Hope it was helpful. Thank you.
