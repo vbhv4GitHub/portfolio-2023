@@ -25,7 +25,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.0",
     "@mui/lab": "^5.0.0-alpha.136",
-    "@mui/material": "^5.14.0",
+    "@mui/material": "^5.14.1",
     "@next/bundle-analyzer": "^13.4.10",
     "contentlayer": "^0.3.1",
     "cross-env": "^7.0.3",
