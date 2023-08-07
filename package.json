@@ -35,7 +35,7 @@
     "next-sitemap": "^4.1.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "rehype-prism-plus": "^1.6.1"
+    "rehype-prism-plus": "^1.6.3"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
