@@ -24,7 +24,7 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.6",
-    "@mui/lab": "^5.0.0-alpha.141",
+    "@mui/lab": "^5.0.0-alpha.142",
     "@mui/material": "^5.14.6",
     "@next/bundle-analyzer": "^13.4.19",
     "cross-env": "^7.0.3",
