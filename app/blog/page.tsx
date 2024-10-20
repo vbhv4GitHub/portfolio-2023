@@ -1,30 +1,18 @@
 import _ from 'lodash';
-import type { NextPage } from 'next';
-import Title from 'components/SEO/Title';
+import { Metadata } from 'next';
 import Header from 'components/Layout/Header';
 import Cards from 'components/UI/Cards/Cards';
 import { POSTS_PER_PAGE } from 'types/constants';
 import { allPosts, Post } from '.contentlayer/generated';
 import MuiPagination from 'components/UI/MuiComponents/MuiPagination';
 
-type Props = { posts: Post[]; pageCount: number };
-
-const Blog: NextPage<Props> = ({ posts, pageCount }: Props) => {
-  return (
-    <>
-      <Title title="Blog Posts" />
-      <Header>Blog Posts</Header>
-
-      <MuiPagination count={pageCount} basePath="blog" />
-      <Cards posts={posts} />
-      <MuiPagination count={pageCount} basePath="blog" />
-    </>
-  );
+export const metadata: Metadata = {
+  title: 'Blog Posts',
 };
 
-export default Blog;
+type FilteredPost = Omit<Post, 'body' | '_raw'>;
 
-export async function getStaticProps() {
+async function getPosts() {
   const posts: Post[] = allPosts.sort((p1, p2) => new Date(p2.date).getTime() - new Date(p1.date).getTime());
 
   const pageCount = Math.ceil(allPosts.length / POSTS_PER_PAGE);
@@ -33,5 +21,19 @@ export async function getStaticProps() {
 
   const filteredPosts = rawPosts.map((post) => _.omit(post, ['body', '_raw']));
 
-  return { props: { posts: filteredPosts, pageCount } };
+  return { posts: filteredPosts as FilteredPost[], pageCount };
+}
+
+export default async function BlogPage() {
+  const { posts, pageCount } = await getPosts();
+
+  return (
+    <>
+      <Header>Blog Posts</Header>
+
+      <MuiPagination count={pageCount} basePath="blog" />
+      <Cards posts={posts as Post[]} />
+      <MuiPagination count={pageCount} basePath="blog" />
+    </>
+  );
 }

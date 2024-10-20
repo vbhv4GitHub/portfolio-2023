@@ -1,61 +1,59 @@
 import dayjs from 'dayjs';
-import theme from 'theme';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { Post } from 'contentlayer/generated';
-import TagCapsule from 'components/UI/MuiComponents/TagCapsule';
-import { Stack, CardHeader, CardContent, Card as MuiCard, Typography } from '@mui/material';
-
-// Dynamic imports
-const EventIcon = dynamic(() => import('@mui/icons-material/Event'));
-const IconWithText = dynamic(() => import('components/UI/IconWithText/IconWithText'));
-const LocalOfferOutlinedIcon = dynamic(() => import('@mui/icons-material/LocalOfferOutlined'));
-
-const CardSubheader = ({ date }: { date: string }) => {
-  return (
-    <IconWithText
-      icon={<EventIcon />}
-      stackProps={{ sx: { mt: 2 } }}
-      text={dayjs(date).format('MMMM D, YYYY')}
-      typographyProps={{ variant: 'subtitle2', color: 'secondary' }}
-    />
-  );
-};
 
 const Card = (post: Post) => {
   return (
-    <MuiCard sx={{ maxWidth: 'md', mx: 'auto' }} elevation={3}>
-      <CardHeader
-        component={Link}
-        title={post.title}
-        href={`/posts/${post.slug}`}
-        className="hover:text-blue-300"
-        color={theme.palette.primary.main}
-        subheader={<CardSubheader date={post.date} />}
-        titleTypographyProps={{ fontSize: 18, fontWeight: 600, noWrap: true }}
-      />
-
-      <CardContent>
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          sx={{
-            overflow: 'hidden',
-            WebkitLineClamp: 3,
-            display: '-webkit-box',
-            WebkitBoxOrient: 'vertical',
-          }}
-        >
+    <div className="w-full max-w-2xl mx-auto overflow-hidden text-white bg-gray-800 rounded-lg shadow-md">
+      <div className="block p-4 sm:p-6">
+        <Link href={`/posts/${post.slug}`}>
+          <h2 className="mb-2 text-lg font-semibold text-blue-300 truncate sm:text-xl">{post.title}</h2>
+        </Link>
+        <div className="flex items-center mb-3 text-xs text-gray-200 sm:mb-4 sm:text-sm">
+          <svg
+            className="w-3 h-3 mr-1 sm:w-4 sm:h-4 sm:mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+            />
+          </svg>
+          <span>{dayjs(post.date).format('MMMM D, YYYY')}</span>
+        </div>
+        <p className="mb-3 text-sm text-gray-300 sm:mb-4 sm:text-base line-clamp-2 sm:line-clamp-3">
           {post.description}
-        </Typography>
-        <Stack sx={{ mt: 2 }} flexDirection="row">
-          <LocalOfferOutlinedIcon sx={{ color: theme.palette.text.secondary, mr: 1 }} />
+        </p>
+        <div className="flex flex-wrap items-center">
+          <svg
+            className="w-3 h-3 mr-1 text-gray-400 sm:w-4 sm:h-4 sm:mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+            />
+          </svg>
           {post.tags.map((tag: string, idx: number) => (
-            <TagCapsule label={tag} href={`/blog/tag/${tag}`} key={idx} />
+            <Link key={idx} href={`/tags/${tag}`}>
+              <span className="px-2 py-1 mb-1 mr-1 text-xs text-gray-700 bg-gray-200 rounded sm:mb-2 sm:mr-2 sm:text-sm">
+                {tag}
+              </span>
+            </Link>
           ))}
-        </Stack>
-      </CardContent>
-    </MuiCard>
+        </div>
+      </div>
+    </div>
   );
 };
 

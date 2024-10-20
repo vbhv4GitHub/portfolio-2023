@@ -1,43 +1,31 @@
-import Router from 'next/router';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
-import React, { FormEvent, useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-
 const SearchBox = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-
-  const searchSubmitHandler = (e: FormEvent) => {
-    e.preventDefault();
-    Router.push({
-      pathname: '/search-results',
-      query: { search: searchTerm },
-    });
-  };
-
   return (
-    <Paper
-      component="form"
-      onSubmit={searchSubmitHandler}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        width: 250,
-        ml: { sm: 0, md: 2 },
-        mt: { xs: 1, sm: 1, md: 0 },
-      }}
-    >
-      <InputBase
-        sx={{ ml: 2, flex: 1 }}
-        onChange={(e) => setSearchTerm(e.target.value)}
+    <form className="relative" method="get" action="/search">
+      <input
+        type="text"
+        name="query"
+        className="w-full py-2 pl-4 pr-10 text-gray-800 border border-gray-300 rounded-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         placeholder="Search a blog post"
-        inputProps={{ 'aria-label': 'Search a blog post' }}
+        aria-label="Search a blog post"
       />
-      <IconButton type="submit" sx={{ p: '5px' }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-    </Paper>
+      <button
+        type="submit"
+        className="absolute top-0 right-0 mt-2 mr-3 text-gray-800 hover:text-gray-600"
+        aria-label="search"
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+    </form>
   );
 };
 

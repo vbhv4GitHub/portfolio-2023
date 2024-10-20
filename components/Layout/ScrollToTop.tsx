@@ -1,42 +1,49 @@
-import theme from 'theme';
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import Zoom from '@mui/material/Zoom';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useState, useEffect } from 'react';
 
 const ScrollToTop = () => {
-  const trigger = useScrollTrigger({
-    target: window,
-    disableHysteresis: true,
-    threshold: 100,
-  });
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const anchor = (
-      (event.target as HTMLDivElement).ownerDocument || document
-    ).querySelector('#back-to-top-anchor');
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
 
-    if (anchor) {
-      anchor.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
-    }
+    window.addEventListener('scroll', toggleVisibility);
+
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
-    <Zoom in={trigger}>
-      <Box
-        onClick={handleClick}
-        role='presentation'
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
-      >
-        <Fab size='small' aria-label='scroll back to top' variant='circular'>
-          <KeyboardArrowUpIcon sx={{ color: theme.palette.primary.dark }} />
-        </Fab>
-      </Box>
-    </Zoom>
+    <>
+      {isVisible && (
+        <button
+          onClick={scrollToTop}
+          className="fixed p-2 text-white transition-all duration-300 ease-in-out bg-blue-500 rounded-full shadow-lg bottom-4 right-4 hover:bg-blue-600 focus:outline-none"
+          aria-label="Scroll to top"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      )}
+    </>
   );
 };
 

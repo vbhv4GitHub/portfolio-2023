@@ -1,22 +1,12 @@
 import React from 'react';
-import theme from 'theme';
-import { TypographyProps } from '@mui/material';
-import Heading from 'components/UI/MuiComponents/Heading';
-import MuiDivider from 'components/UI/MuiComponents/MuiDivider';
 
 type Props = {
   children: React.ReactNode;
-} & Omit<TypographyProps, 'component'>;
+  className?: string;
+};
 
-const Header = ({ children, ...rest }: Props) => {
-  return (
-    <>
-      <Heading variant="h4" {...rest} color={theme.palette.primary.main}>
-        {children}
-      </Heading>
-      <MuiDivider sxProps={{ width: 320, mx: 'auto' }} />
-    </>
-  );
+const Header = ({ children, className = '' }: Props) => {
+  return <h1 className={`text-2xl font-bold text-gray-100 mb-12 text-center ${className}`}>{children}</h1>;
 };
 
 export default Header;
