@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Grid, LinearProgress, Typography } from '@mui/material';
 
 const skills = [
   {
@@ -61,31 +60,27 @@ const skills = [
 
 export default function Skills() {
   return (
-    <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2 }} sx={{ marginX: 'auto !important', maxWidth: 'sm' }}>
+    <div className="grid max-w-3xl grid-cols-2 gap-8 mx-auto sm:grid-cols-3 md:grid-cols-4">
       {skills.map(({ name, logo, percentage }) => {
-        const color = percentage > 85 ? 'success' : percentage > 75 ? 'primary' : percentage > 60 ? 'warning' : 'error';
+        const color =
+          percentage > 85
+            ? 'bg-green-500'
+            : percentage > 75
+            ? 'bg-blue-500'
+            : percentage > 60
+            ? 'bg-yellow-500'
+            : 'bg-red-500';
 
         return (
-          <Grid
-            item
-            xs={4}
-            sm={3}
-            key={logo}
-            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
-          >
+          <div key={logo} className="flex flex-col items-center">
             <Image alt={name} src={logo} height={55} width={55} />
-            <Typography variant="body1" mb={2} mt={1}>
-              {name}
-            </Typography>
-            <LinearProgress
-              color={color}
-              value={percentage}
-              variant="determinate"
-              sx={{ height: 8, width: '100%', borderRadius: 5 }}
-            />
-          </Grid>
+            <p className="mt-2 mb-1 text-sm font-medium">{name}</p>
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+              <div className={`h-2.5 rounded-full ${color}`} style={{ width: `${percentage}%` }}></div>
+            </div>
+          </div>
         );
       })}
-    </Grid>
+    </div>
   );
 }

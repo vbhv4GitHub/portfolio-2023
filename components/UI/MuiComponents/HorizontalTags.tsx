@@ -1,19 +1,19 @@
 import React from 'react';
-import { Chip, ChipProps, Stack, StackProps } from '@mui/material';
 
 type Props = {
   arr: string[];
-  stackProps?: StackProps;
-  chipProps?: ChipProps;
+  className?: string;
 };
 
-const HorizontalTags: React.FC<Props> = ({ arr, ...props }) => {
+const HorizontalTags: React.FC<Props> = ({ arr, className = '' }) => {
   return (
-    <Stack flexDirection='row' {...props.stackProps} justifyContent='center'>
+    <div className={`flex flex-wrap justify-center ${className}`}>
       {arr.map((tag, idx) => (
-        <Chip label={tag} key={idx} sx={{ mr: 1, mb: 1 }} size='small' {...props.chipProps} />
+        <span key={idx} className="px-2 py-1 mb-2 mr-2 text-sm text-gray-700 bg-gray-200 rounded-full">
+          {tag}
+        </span>
       ))}
-    </Stack>
+    </div>
   );
 };
 

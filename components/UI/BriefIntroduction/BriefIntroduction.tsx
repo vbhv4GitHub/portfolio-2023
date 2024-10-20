@@ -1,31 +1,16 @@
-import { Container } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import theme from 'theme';
-
 export default function BriefIntroduction() {
   return (
-    <Container sx={{ my: 10 }}>
-      <Typography variant="h2" fontWeight={700} sx={{ px: { md: '25%' } }}>
+    <div className="text-center md:text-left">
+      <h2 className="text-4xl font-bold md:px-1/4">
         Hi, I&apos;m&nbsp;
-        <Typography
-          variant="h2"
-          fontWeight={700}
-          component="span"
-          display="inline"
-          color={theme.palette.secondary.main}
-        >
-          Vaibhav
-        </Typography>
-      </Typography>
-      <Typography variant="h5" fontWeight={600} color={theme.palette.primary.main} sx={{ px: { md: '25%' } }}>
-        A Fullstack Web Developer
-      </Typography>
-      <Typography variant="body1" sx={{ px: { md: '25%' }, mt: 2 }}>
-        &emsp;&emsp;I&apos;ve almost two year&apos;s hands-on experience working on a fin-tech application. My current
-        tech stack includes React with MaterialUI on frontend with Hapi, Postgres with TypeORM on backend. I&apos;ve
-        also spent fair share of time working with NextJS, Tailwind, Express, MongoDB & Prisma on some of my pet
-        projects.
-      </Typography>
-    </Container>
+        <span className="inline text-yellow-500">Vaibhav</span>
+      </h2>
+      <h3 className="mt-2 text-xl font-semibold text-blue-600 md:px-1/4">A Fullstack Web Developer</h3>
+      <p className="mt-4 md:px-1/4">
+        I have almost two years of hands-on experience working on a fin-tech application. My current tech stack includes
+        React with Tailwind CSS on the frontend, with Hapi and Postgres with TypeORM on the backend. I&apos;ve also
+        spent a fair share of time working with NextJS, Express, MongoDB & Prisma on some of my pet projects.
+      </p>
+    </div>
   );
 }

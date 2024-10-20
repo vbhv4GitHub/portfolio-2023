@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import React from 'react';
 
 type Props = { link: string; text: string };
 
@@ -6,13 +6,11 @@ const ExternalLink = ({ link, text }: Props) => {
   return (
     <a
       href={link}
-      target='_blank'
-      rel='noreferrer'
-      style={{ textDecoration: 'none' }}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-block px-4 py-2 text-white transition-colors duration-300 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
     >
-      <Button variant='outlined' color='primary' sx={{ textTransform: 'none' }}>
-        {text}
-      </Button>
+      {text}
     </a>
   );
 };

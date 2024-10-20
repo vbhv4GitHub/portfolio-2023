@@ -2,12 +2,12 @@
 
 module.exports = {
   variants: {},
+  darkMode: 'class',
   theme: {
     extend: {
       typography: {
         DEFAULT: {
           css: {
-            fontFamily: 'Source Code Pro',
             'code::before': {
               content: 'none',
             },
@@ -18,7 +18,6 @@ module.exports = {
               fontSize: '1rem',
               fontWeight: 500,
               color: '#fef3c7',
-              fontFamily: 'Source Code Pro',
             },
             a: {
               fontWeight: 500,
@@ -32,7 +31,7 @@ module.exports = {
       },
     },
   },
-  content: ['pages/**/*', 'components/**/*'],
+  content: ['app/**/*', 'components/**/*'],
   plugins: [require('@tailwindcss/typography')],
   future: { removeDeprecatedGapUtilities: true, purgeLayersByDefault: true },
 };

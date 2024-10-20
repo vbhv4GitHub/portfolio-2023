@@ -1,10 +1,14 @@
 import React from 'react';
-import { Divider, SxProps } from '@mui/material';
 
-type Props = { my?: number | string; sxProps?: SxProps };
+type Props = {
+  my?: number | string;
+  className?: string;
+};
 
-const MuiDivider = ({ my, sxProps }: Props) => {
-  return <Divider sx={{ my: my || 5, ...sxProps }} />;
+const MuiDivider = ({ my = 5, className = '' }: Props) => {
+  const marginClass = typeof my === 'number' ? `my-${my}` : `my-[${my}]`;
+
+  return <hr className={`border-t border-gray-300 ${marginClass} ${className}`} />;
 };
 
 export default MuiDivider;

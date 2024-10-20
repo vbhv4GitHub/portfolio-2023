@@ -1,22 +1,17 @@
 import React from 'react';
-import Text from 'components/UI/MuiComponents/Text';
-import { Stack, StackProps, TypographyProps } from '@mui/material';
 
 type Props = {
   text: string;
   icon: React.ReactNode;
-  typographyProps?: Omit<TypographyProps, 'component'>;
-  stackProps?: StackProps;
+  className?: string;
 };
 
-const IconWithText = (props: Props) => {
+const IconWithText = ({ text, icon, className = '' }: Props) => {
   return (
-    <Stack direction="row" alignItems="center" gap={1} {...props.stackProps}>
-      {props.icon}
-      <Text component="p" {...props.typographyProps}>
-        {props.text}
-      </Text>
-    </Stack>
+    <div className={`flex items-center space-x-2 ${className}`}>
+      <span className="flex-shrink-0">{icon}</span>
+      <span className="text-sm">{text}</span>
+    </div>
   );
 };
 

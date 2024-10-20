@@ -1,16 +1,20 @@
 import React, { ReactNode } from 'react';
-import { Typography, TypographyProps } from '@mui/material';
 
-type Props = Omit<TypographyProps, 'component'> & {
+type Props = React.HTMLAttributes<HTMLElement> & {
   children: ReactNode;
   component?: 'p' | 'span' | 'div';
 };
 
-const Text = ({ children, ...rest }: Props) => {
+const Text = ({ children, component = 'p', className = '', ...rest }: Props) => {
+  const Component = component;
+
+  const baseClasses = 'text-center';
+  const combinedClasses = `${baseClasses} ${className}`;
+
   return (
-    <Typography component="p" textAlign="center" {...rest}>
+    <Component className={combinedClasses} {...rest}>
       {children}
-    </Typography>
+    </Component>
   );
 };
 
