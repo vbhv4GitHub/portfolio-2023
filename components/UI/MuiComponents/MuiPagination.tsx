@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { Suspense, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 type Props = {
@@ -10,10 +10,18 @@ type Props = {
 };
 
 const MuiPagination = ({ count, basePath }: Props) => {
+  return (
+    <Suspense fallback={<div>Loading pagination...</div>}>
+      <PaginationContent count={count} basePath={basePath} />
+    </Suspense>
+  );
+};
+
+const PaginationContent = ({ count, basePath }: Props) => {
   const searchParams = useSearchParams();
   const slug = searchParams.get('slug');
   const page = searchParams.get('page');
-  const currentPage = parseInt(page || '1');
+  const currentPage = page ? parseInt(page) : 1;
 
   const currentPath = useMemo(() => {
     const path = basePath ? `/${basePath}` : '';
@@ -49,7 +57,7 @@ const MuiPagination = ({ count, basePath }: Props) => {
             key={index}
             page={typeof pageNumber === 'number' ? pageNumber : null}
             currentPath={currentPath}
-            current={pageNumber === currentPage}
+            current={typeof pageNumber === 'number' && pageNumber === currentPage}
           >
             {pageNumber}
           </PaginationItem>
@@ -87,7 +95,11 @@ const PaginationItem = ({ children, page, currentPath, current, disabled }: Pagi
 
   return (
     <li>
-      <Link href={`${currentPath}/${page}`} className={`${baseClasses} ${activeClasses} ${disabledClasses}`}>
+      <Link
+        href={`${currentPath}/${page}`}
+        className={`${baseClasses} ${activeClasses} ${disabledClasses}`}
+        aria-current={current ? 'page' : undefined}
+      >
         {children}
       </Link>
     </li>

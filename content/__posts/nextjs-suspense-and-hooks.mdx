@@ -1,0 +1,162 @@
+---
+title: 'Proper Use of Suspense with Hooks in Next.js'
+date: '2024-10-26'
+description: 'Learn how to correctly implement Suspense boundaries with hooks like useSearchParams() in Next.js to avoid common errors and improve application performance.'
+tags: ['next.js', 'react', 'suspense', 'hooks']
+---
+
+# Proper Use of Suspense with Hooks in Next.js
+
+When working with Next.js and React, you might encounter an error message like this:
+
+useSearchParams() should be wrapped in a suspense boundary at page "/some-page". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+
+This error occurs when using certain hooks, like `useSearchParams()`, without proper Suspense boundaries. Let's dive into why this happens and how to fix it.
+
+## The Problem
+
+Consider this component:
+
+```jsx
+import { useSearchParams } from 'next/navigation';
+const ProblematicComponent = () => {
+  const searchParams = useSearchParams();
+  return <nav>{/* Use searchParams here */}</nav>;
+};
+```
+
+Even if you wrap the entire component in a Suspense boundary:
+
+```jsx
+<Suspense fallback={<div>Loading...</div>}>
+  <ProblematicComponent />
+</Suspense>
+```
+
+You might still encounter the error. Why? Because the `useSearchParams()` hook is called immediately when the component function is executed, before any JSX is rendered.
+
+## The Solution
+
+The solution is to split your component into two parts:
+
+1. An outer component that provides the Suspense boundary
+2. An inner component that uses the potentially suspending hook
+
+Here's how it looks:
+
+```jsx
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+const CorrectComponent = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InnerComponent />
+    </Suspense>
+  );
+};
+const InnerComponent = () => {
+  const searchParams = useSearchParams();
+  return <nav>{/* Use searchParams here */}</nav>;
+};
+```
+
+## Why This Works
+
+1. **Hook Execution Timing**: The potentially suspending hook (`useSearchParams()`) is now isolated in the inner component.
+2. **Granular Suspense Boundaries**: React can suspend just the part of the component that depends on the hook, rather than the entire component.
+3. **Optimization**: The outer component can render immediately, showing a loading state if necessary, while the inner component loads asynchronously.
+
+## Real-World Example
+
+Here's a more complete example using a pagination component:
+
+```jsx
+'use client';
+
+import Link from 'next/link';
+import { Suspense, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Pagination, PaginationItem } from '@mui/material';
+
+const MuiPagination = ({ count, basePath }) => {
+  return (
+    <Suspense fallback={<div>Loading pagination...</div>}>
+      <PaginationContent count={count} basePath={basePath} />
+    </Suspense>
+  );
+};
+
+const PaginationContent = ({ count, basePath }) => {
+  const searchParams = useSearchParams();
+
+  const slug = searchParams.get('slug');
+  const page = searchParams.get('page');
+  const currentPage = parseInt(page || '1');
+
+  const paginationItems = useMemo(() => {
+    return [...Array(count)].map((_, index) => {
+      const pageNumber = index + 1;
+      const path = `${basePath}/${pageNumber}${slug ? `?slug=${slug}` : ''}`;
+
+      return (
+        <PaginationItem
+          key={pageNumber}
+          component={Link}
+          href={path}
+          page={pageNumber}
+          selected={pageNumber === currentPage}
+        />
+      );
+    });
+  }, [count, basePath, slug, currentPage]);
+
+  return (
+    <nav aria-label="pagination navigation">
+      <Pagination count={count} page={currentPage} renderItem={(item) => paginationItems[item.page - 1]} />
+    </nav>
+  );
+};
+
+export default MuiPagination;
+```
+
+In this example:
+
+- `MuiPagination` is the outer component that provides the Suspense boundary.
+- `PaginationContent` is the inner component that uses `useSearchParams()` and contains the pagination logic.
+- We use Material-UI's `Pagination` component for the actual pagination UI.
+- The `useMemo` hook is used to optimize the creation of pagination items.
+
+## Best Practices
+
+When working with hooks that might cause suspense in Next.js, follow these best practices:
+
+1. **Identify Suspending Hooks**: Be aware of hooks that might cause suspense, such as `useSearchParams()`, `usePathname()`, and data fetching hooks.
+
+2. **Component Structure**: Split components that use suspending hooks into outer and inner components.
+
+3. **Suspense Placement**: Always wrap the inner component with Suspense in the outer component.
+
+4. **Fallback UI**: Provide meaningful fallback UI in the Suspense component to improve user experience during loading.
+
+5. **Error Boundaries**: Consider using Error Boundaries alongside Suspense to handle potential errors gracefully.
+
+## Conclusion
+
+Properly handling Suspense with hooks in Next.js is crucial for creating robust and efficient applications. By following the pattern of splitting components and using Suspense boundaries correctly, you can avoid errors related to missing Suspense boundaries and provide a smoother user experience.
+
+Remember:
+
+1. Split your component into outer and inner parts
+2. Wrap the inner component with Suspense in the outer component
+3. Use the potentially suspending hook in the inner component
+
+By adhering to these guidelines, you'll create Next.js applications that handle asynchronous operations smoothly and provide a better overall user experience.
+
+## Further Reading
+
+- [Next.js Documentation on Suspense](https://nextjs.org/docs/advanced-features/react-18/suspense)
+- [React Documentation on Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html)
+- [Understanding Suspense in React 18](https://blog.logrocket.com/understanding-suspense-react-18/)
+
+Happy coding!

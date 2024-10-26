@@ -10,9 +10,10 @@ export const metadata: Metadata = {
   title: 'Blog Posts',
 };
 
-type Props = { params: { page: string } };
+type Props = { params: Promise<{ page: string }> };
 
-export default function BlogPage({ params }: Props) {
+export default async function BlogPage(props: Props) {
+  const params = await props.params;
   const pageNo = parseInt(params.page);
   const posts = getPosts(pageNo);
   const pageCount = Math.ceil(allPosts.length / POSTS_PER_PAGE);
