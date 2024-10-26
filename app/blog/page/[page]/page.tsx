@@ -4,7 +4,7 @@ import Header from 'components/Layout/Header';
 import Cards from 'components/UI/Cards/Cards';
 import { POSTS_PER_PAGE } from 'types/constants';
 import { allPosts, Post } from '.contentlayer/generated';
-import MuiPagination from 'components/UI/MuiComponents/MuiPagination';
+import MuiPagination from 'components/UI/Components/Pagination';
 
 export const metadata: Metadata = {
   title: 'Blog Posts',
@@ -22,9 +22,9 @@ export default async function BlogPage(props: Props) {
     <>
       <Header>Blog Posts</Header>
 
-      <MuiPagination count={pageCount} basePath="blog" />
+      <MuiPagination totalPages={pageCount} path="/blog" currentPage={pageNo} />
       <Cards posts={posts as Post[]} />
-      <MuiPagination count={pageCount} basePath="blog" />
+      <MuiPagination totalPages={pageCount} path="/blog" currentPage={pageNo} />
     </>
   );
 }

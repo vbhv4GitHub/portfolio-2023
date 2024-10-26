@@ -5,11 +5,9 @@ description: 'Learn how to correctly implement Suspense boundaries with hooks li
 tags: ['next.js', 'react', 'suspense', 'hooks']
 ---
 
-# Proper Use of Suspense with Hooks in Next.js
-
 When working with Next.js and React, you might encounter an error message like this:
 
-useSearchParams() should be wrapped in a suspense boundary at page "/some-page". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+`useSearchParams()` should be wrapped in a suspense boundary at page "/some-page". [Read more.](https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout)
 
 This error occurs when using certain hooks, like `useSearchParams()`, without proper Suspense boundaries. Let's dive into why this happens and how to fix it.
 
@@ -19,6 +17,7 @@ Consider this component:
 
 ```jsx
 import { useSearchParams } from 'next/navigation';
+
 const ProblematicComponent = () => {
   const searchParams = useSearchParams();
   return <nav>{/* Use searchParams here */}</nav>;
@@ -47,6 +46,7 @@ Here's how it looks:
 ```jsx
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+
 const CorrectComponent = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -54,6 +54,7 @@ const CorrectComponent = () => {
     </Suspense>
   );
 };
+
 const InnerComponent = () => {
   const searchParams = useSearchParams();
   return <nav>{/* Use searchParams here */}</nav>;
@@ -159,4 +160,4 @@ By adhering to these guidelines, you'll create Next.js applications that handle 
 - [React Documentation on Suspense](https://reactjs.org/docs/concurrent-mode-suspense.html)
 - [Understanding Suspense in React 18](https://blog.logrocket.com/understanding-suspense-react-18/)
 
-Happy coding!
+**Happy coding!**
