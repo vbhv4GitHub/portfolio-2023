@@ -4,13 +4,15 @@ import Header from 'components/Layout/Header';
 import Cards from 'components/UI/Cards/Cards';
 import { allPosts, Post } from '.contentlayer/generated';
 
-type Props = { params: { tag: string } };
+type Props = { params: Promise<{ tag: string }> };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
   return { title: params.tag };
 }
 
-export default function TagPage({ params }: Props) {
+export default async function TagPage(props: Props) {
+  const params = await props.params;
   const { tag } = params;
   const posts = allPosts.sort((p1, p2) => new Date(p2.date).getTime() - new Date(p1.date).getTime());
 

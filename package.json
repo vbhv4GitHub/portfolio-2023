@@ -10,8 +10,8 @@
     "Full-Stack Web Developer"
   ],
   "scripts": {
-    "dev": "contentlayer build && next dev",
-    "build": "contentlayer build && next build",
+    "dev": "contentlayer2 build && next dev",
+    "build": "contentlayer2 build && next build",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
@@ -22,8 +22,8 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
-    "next": "^14.2.15",
-    "next-contentlayer": "^0.3.4",
+    "next": "^15.0.1",
+    "next-contentlayer2": "^0.4.6",
     "next-sitemap": "^4.2.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -33,19 +33,19 @@
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/lodash": "^4.17.12",
-    "@types/node": "22.7.7",
-    "@types/react": "18.3.11",
+    "@types/node": "22.8.1",
+    "@types/react": "18.3.12",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "14.2.15",
+    "eslint": "^9.13.0",
+    "eslint-config-next": "15.0.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
     "typescript": "5.6.3"
   },
   "overrides": {
-    "next-contentlayer": {
+    "next-contentlayer2": {
       "next": "$next"
     }
   }

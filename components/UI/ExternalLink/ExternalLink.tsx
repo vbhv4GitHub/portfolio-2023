@@ -1,4 +1,4 @@
-import React from 'react';
+'use server';
 
 type Props = { link: string; text: string };
 
