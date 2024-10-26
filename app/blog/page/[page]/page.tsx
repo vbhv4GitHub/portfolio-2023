@@ -5,7 +5,6 @@ import Cards from 'components/UI/Cards/Cards';
 import { POSTS_PER_PAGE } from 'types/constants';
 import { allPosts, Post } from '.contentlayer/generated';
 import MuiPagination from 'components/UI/MuiComponents/MuiPagination';
-import { Omit } from 'utility-types';
 
 export const metadata: Metadata = {
   title: 'Blog Posts',

@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "dev": "contentlayer build && next dev",
-    "build": "contentlayer build && next build && next export",
+    "build": "contentlayer build && next build",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
@@ -27,8 +27,7 @@
     "next-sitemap": "^4.2.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "rehype-prism-plus": "^2.0.0",
-    "utility-types": "^3.11.0"
+    "rehype-prism-plus": "^2.0.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^6.0.0",
