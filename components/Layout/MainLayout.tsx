@@ -1,6 +1,7 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import Navbar from 'components/Layout/Navbar';
-import { Container, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Source_Code_Pro } from 'next/font/google';
 
@@ -24,14 +25,12 @@ const MainLayout = ({ children }: Props) => {
   }, []);
 
   return (
-    <Stack className={sourceCodePro.className}>
+    <div className={`flex flex-col min-h-screen ${sourceCodePro.className}`}>
       <Navbar />
-      <Container maxWidth="xl" sx={{ py: 10, minHeight: '90vh' }}>
-        {children}
-      </Container>
+      <main className="container flex-grow px-4 py-6 mx-auto sm:px-6 sm:py-10 max-w-7xl md:w-auto">{children}</main>
       <Footer />
       {isWindow && <ScrollToTop />}
-    </Stack>
+    </div>
   );
 };
 
