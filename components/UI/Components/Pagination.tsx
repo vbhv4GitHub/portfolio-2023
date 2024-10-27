@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 import Link from 'next/link';
-import RightArrowIcon from 'components/UI/SvgIcons/RightArrowIcon';
 import LeftArrowIcon from 'components/UI/SvgIcons/LeftArrowIcon';
+import RightArrowIcon from 'components/UI/SvgIcons/RightArrowIcon';
 
 type Props = {
   path: string;
@@ -64,14 +64,14 @@ const Pagination = ({ path, totalPages, currentPage }: Props) => {
             href={`${path}/page/${page - 1}`}
             className={clsx(
               'flex items-center justify-center h-8 px-3 leading-tight rounded-l-lg',
-              isPreviousLinkInactive ? 'text-[#232323]' : 'hover:bg-gray-800'
+              isPreviousLinkInactive ? 'text-gray-900' : 'hover:bg-gray-900'
             )}
           >
             <LeftArrowIcon />
           </Link>
         </li>
         {paginationItems.map((item, idx) => {
-          const activePageClass = clsx({ 'bg-gray-800': item === page });
+          const activePageClass = clsx({ 'bg-gray-900': item === page });
           const isItemClickable = clsx({ 'pointer-events-none': item === '...' });
 
           return (
@@ -81,7 +81,7 @@ const Pagination = ({ path, totalPages, currentPage }: Props) => {
                 href={`${path}/page/${item}`}
                 className={clsx(
                   activePageClass,
-                  isItemClickable ? null : 'hover:bg-gray-800',
+                  isItemClickable ? null : 'hover:bg-gray-900',
                   'flex items-center justify-center h-8 px-2 leading-tight rounded-md'
                 )}
               >
@@ -96,7 +96,7 @@ const Pagination = ({ path, totalPages, currentPage }: Props) => {
             href={`${path}/page/${page + 1}`}
             className={clsx(
               'flex items-center justify-center h-8 px-3 leading-tight rounded-r-lg',
-              isNextLinkInactive ? 'text-[#232323]' : 'hover:bg-gray-800'
+              isNextLinkInactive ? 'text-gray-900' : 'hover:bg-gray-900'
             )}
           >
             <RightArrowIcon />

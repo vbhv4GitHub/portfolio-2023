@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isNavMenuOpen, setIsNavMenuOpen] = useState<boolean>(false);
 
   return (
-    <header className="text-gray-300 bg-gray-800 shadow-md">
+    <header className="text-gray-300 bg-gray-900 shadow-md">
       <div className="container flex flex-col items-center justify-between px-4 py-2 mx-auto md:flex-row">
         <div className="flex justify-between w-full md:w-auto">
           <Link href="/" aria-label="vbhv4WebDev Logo">

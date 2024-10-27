@@ -27,7 +27,7 @@ const MainLayout = ({ children }: Props) => {
   return (
     <div className={`flex flex-col min-h-screen ${sourceCodePro.className}`}>
       <Navbar />
-      <main className="container flex-grow px-4 py-6 mx-auto sm:px-6 sm:py-10 max-w-7xl md:w-auto">{children}</main>
+      <main className="container flex-grow px-4 py-6 mx-auto sm:px-6 sm:py-10 max-w-7xl md:w-3xl">{children}</main>
       <Footer />
       {isWindow && <ScrollToTop />}
     </div>

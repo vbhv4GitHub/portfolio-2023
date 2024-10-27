@@ -14,7 +14,7 @@ const TimelineItem = ({
   <div className="flex mb-8 last:mb-0">
     <div className="flex flex-col items-center mr-4">
       <div className="flex-grow w-px h-full bg-gray-300"></div>
-      <div className="flex items-center justify-center w-8 h-8 text-white bg-blue-500 rounded-full">{icon}</div>
+      <div className="flex items-center justify-center w-8 h-24 text-white bg-blue-500 rounded-full">{icon}</div>
       <div className="flex-grow w-px h-full bg-gray-300"></div>
     </div>
     <div className="flex-grow">
