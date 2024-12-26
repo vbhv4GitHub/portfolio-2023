@@ -18,7 +18,7 @@
     "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
-    "@next/bundle-analyzer": "^15.0.3",
+    "@next/bundle-analyzer": "^15.1.2",
     "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.13",
