@@ -1,0 +1,51 @@
+---
+title: Undo Git Rebase After Completion
+date: 2023-02-12
+description: How to revert back to original commit after git rebase
+tags: ['git', 'git-rebase', 'git-reflog']
+---
+
+Have you ever found yourself in a situation when you rebase your branch locally and then push your code to github, the file changes on the pull request gets all messed up?
+
+Well, I've been there quite a few times. To avoid the situation I mostly prefer to use `git merge` instead of `git rebase`.
+
+But if you are stuck in such a situation and don't want to close your PR only to reopen it with a new branch & brand new pull request this post might help.
+
+## Git reflog
+
+```bash
+git reflog
+```
+
+It'll list down all your git logs with the information about when the tips of branches and other references were updated in the local repository. That's what the `reflog` stands for `Reference Logs`. Once you find the `commit-sha` of your commit from where you started the rebase, use the command below.
+
+```bash
+git checkout commit-sha
+```
+
+It'll put the repository or your branch in a detached head state.
+
+```bash
+git switch -c new-branch-name
+```
+
+With the above command you can create a new branch which will be same as the state you were in before the rebase.
+
+If you don't want a new branch then you can simply revert your current branch to state before rebase using the commands below.
+
+```bash
+git reset hard commit-sha
+```
+
+or
+
+```bash
+git reset hard HEAD@{2}
+```
+
+[Learn more about git reflog](https://git-scm.com/docs/git-reflog)
+[Learn more about git switch](https://git-scm.com/docs/git-switch)
+
+**BONUS:** `git switch -` acts like an undo command for your checkout steps.
+
+Hope it was helpful. Thank you.

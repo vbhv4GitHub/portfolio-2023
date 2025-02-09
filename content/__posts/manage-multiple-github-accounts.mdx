@@ -1,0 +1,120 @@
+---
+title: Manage Multiple Github Accounts
+date: 2023-03-25
+description: Step by step guide on managing multiple github accounts on a single machine using ssh keys.
+tags: ['git', 'github', 'ssh']
+---
+
+Let's say you have two Github accounts - `john_wick` for personal use, and `john_doe` for work. We can use ssh keys and define host aliases in ssh config file; each alias for an account.
+
+## Generate ssh key pairs for github accounts
+
+Run the command substituting your github email address to generate the ssh keys for both Github accounts.
+
+```bash
+ssh-keygen -t ed25519 -C "johnWick@hightable.org"
+```
+
+Add your ssh keys to respective Github accounts by going to:
+
+```bash
+Settings -> SSH and GPG keys
+```
+
+### Docs
+
+- [Generate ssh key pairs for accounts](https://help.github.com/articles/generating-a-new-ssh-key/)
+- [Add ssh key to GitHub accounts](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
+
+## Edit or create ssh config file
+
+Create a file named `config` without any extesion in your `<root>/.ssh/` directory with contents below:
+
+```bash
+# Default github account: john_wick
+Host github.com
+   HostName github.com
+   IdentityFile ~/.ssh/id_wick
+   IdentitiesOnly yes
+
+# Other github account: john_doe
+Host High-Table
+   HostName github.com
+   IdentityFile ~/.ssh/id_doe
+   IdentitiesOnly yes
+```
+
+_NOTE:_ `High-Table` in the config file is coming from github overview page of your organization.
+
+```bash
+Example: https://github.com/High-Table
+```
+
+## Add ssh private keys to your agent
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_wick
+ssh-add ~/.ssh/id_doe
+```
+
+### Docs
+
+- [Add ssh private keys to your agent](https://help.github.com/articles/adding-a-new-ssh-key-to-the-ssh-agent/)
+
+## Test your ssh connections
+
+```bash
+ssh -T git@github.com
+ssh -T git@High-Table
+```
+
+You'll see a prompt asking for a confirmation as below:
+
+```bash
+The authenticity of host 'github.com (192.30.252.1)' cant be established.
+RSA key fingerprint is xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:
+Are you sure you want to continue connecting (yes/no)?
+```
+
+If everything is alright you'll see a success response like down below:
+
+```bash
+Hi John Wick! You have successfully authenticated, but GitHub does not provide shell access.
+```
+
+## Last piece of the puzzle
+
+Close any remote repository
+
+```bash
+git clone git@high-table:paraballem/chapter-3.git <path-to-directory>
+cd <path-to-directory>
+git config user.email "johnDoe@hightable.org"
+git config user.name  "John Doe"
+```
+
+If for any reason you're having any issues with cloning you can try to create an empty directory and then run the following commands.
+
+```bash
+git remote add origin git@high-table:paraballem/chapter-3.git
+git pull origin master
+```
+
+I've faced this issue with an organization project where I was unable to clone but the second approached worked fine.
+
+And, if you are still facing any issues with even the second approach then you can try the same approach after overriding the default ssh key for repository.
+
+```bash
+git config --local core.sshCommand "ssh -i ~/.ssh/id_doe"
+git remote add origin git@high-table:paraballem/chapter-3.git
+git pull origin master
+```
+
+### References Used
+
+- [Using multiple Github Accounts with ssh keys](https://gist.github.com/oanhnn/80a89405ab9023894df7)
+- [Handle Multiple Github Accounts](https://blog.revathskumar.com/2018/12/handle-multiple-github-accounts.html)
+- [Managing Multiple Accounts](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-your-personal-account/managing-multiple-accounts)
+
+Hope it helps! Thank you.

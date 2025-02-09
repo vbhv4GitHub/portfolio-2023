@@ -1,0 +1,51 @@
+---
+title: Upgrade nodeJS project dependencies
+date: 2023-02-19
+description: Few ways to manage and update your nodeJS project dependencies
+tags: ['npm', 'ncu', 'dependencies', 'nodeJS']
+---
+
+## Using npm
+
+```bash
+npm outdated
+```
+
+This can be used to checked what dependencies in your packages are needed.
+
+```bash
+npm update
+```
+
+This can be used to update all the minor & patch updates in your dependencies, it'll also update your `package.lock.json` so that everything is in sync.
+
+```bash
+npm i next@latest
+```
+
+The `npm update` does not upgrade any of the dependencies to their major update versions, but if you want to take that risk. You can use this command.
+
+## Using ncu: npm-check-updates
+
+```bash
+ncu
+```
+
+Shows you all the new version available.
+
+```bash
+ncu u
+```
+
+Updates your `package.json`
+
+```bash
+npm i
+```
+
+Installs all the updated dependencies to your project.
+
+`ncu` provides some really cool ways to manage your dependencies which I really love. If you want to get into more details check out the link below:
+[npm-check-updates](https://github.com/raineorshine/npm-check-updates)
+
+Hope it helps. Thank you.

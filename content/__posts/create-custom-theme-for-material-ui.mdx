@@ -1,0 +1,85 @@
+---
+title: Create Custom Theme For Material UI
+date: 2023-02-26
+description: Sharing my experience with Material UI theming, with hope that it might save someone's time, perhaps.
+tags: ['materialui', 'theming', 'react']
+---
+
+The first place you should visit after visiting [MUI themeing documentation](https://mui.com/material-ui/customization/theming/) for customizing your own MUI theme should be [MUI Theme Creator](https://zenoo.github.io/mui-theme-creator/).
+
+Once you've played around a little bit with MUI theme creator here are some of the tips that might be helpful for you.
+
+## Use default theme object in your custom theme
+
+```typescript
+import { createTheme } from '@mui/material/styles';
+
+const defaultTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#93c5fd',
+      light: '#bfdbfe',
+    },
+    secondary: {
+      main: '#fef3c7',
+    },
+  },
+});
+
+const theme = createTheme(defaultTheme, {
+  palette: {
+    divider: defaultTheme.palette.primary.light,
+  },
+  components: {
+    MuiChip: {
+      styleOverrides: {
+        label: {
+          color: defaultTheme.palette.primary.main,
+        },
+      },
+    },
+  },
+});
+
+export default theme;
+```
+
+As you can see instead of using the hex code for colors everywhere in my custom theme I'm using the `defaultTheme` itself. Hope you get the point.
+
+## Declare modules to avoid typescript lint problem
+
+Let's say you want to add a custom property to your primary theme palette called `master`. By default you'll not be able to do so due to type checking restrictions.
+
+The typescript lint error would appear something like this.
+
+```bash
+Type '{ main: string; master: string; }' is not assignable to type 'PaletteColorOptions | undefined'.
+  Object literal may only specify known properties, and 'master' does not exist in type 'PaletteColorOptions'.ts(2322)
+```
+
+To get around this problem you just need to declare a custom module by yourself just like the example shared below, and voila!!!
+
+```typescript
+import { createTheme } from '@mui/material/styles';
+
+declare module '@mui/material/styles' {
+  interface PaletteColorOptions {
+    main: string;
+    master: string;
+  }
+}
+
+const defaultTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#93c5fd',
+      master: '#fff',
+    },
+  },
+});
+```
+
+For the time being those are the only tips I've. Hopefully I'll make improvements on this post in the future.
+
+Thank you. Happy Coding.

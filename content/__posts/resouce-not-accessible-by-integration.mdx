@@ -1,0 +1,31 @@
+---
+title: Resouce Not Accessible By Integration
+date: 2023-02-23
+description: When a Cognito account is stuck in UNCOFIRMED state, cognito's signup and resendCode method throws an error.
+tags: ['github', 'cicd', 'error']
+---
+
+Have you ever ran into this error when you want to trigger a CICD script on Github.
+
+```sh
+Resource not accessible by integration
+```
+
+If your answer is Yes, then you can try updating action settings for your github repository. It could be a scope issue quite possibly.
+
+Just go to your github repository and then navigate to
+
+```sh
+Settings --> Actions --> General
+```
+
+Provide your actions read and write permissions.
+
+!["Workflow Permissions"](/assets/images/resouce-not-accessible-by-integration/workflow-permissions-github.jpg)
+
+Hope it helps.
+
+If it didn't fix your problem you can check out the below stack overflow question.
+[Resource not accessible by integration](https://stackoverflow.com/questions/70435286/resource-not-accessible-by-integration-on-github-post-repos-owner-repo-ac)
+
+Thank you. Happy Coding.

@@ -1,0 +1,30 @@
+---
+title: Reset Primary key sequence in Postgres
+date: 2023-04-02
+description: Reset primary key sequence in postgres for any table
+tags: ['sql', 'postgres', 'primaryKey']
+---
+
+### Check the max id
+
+```sql
+SELECT MAX(id) FROM public.table_name;
+```
+
+### Check the next id value
+
+```sql
+SELECT nextval('public."table_name_id_seq"');
+```
+
+### If the next id value is greater than max id
+
+Use the below query to set primary key id sequence of your table to max id incremented by one.
+
+```sql
+SELECT setval('public."table_name_id_seq"',
+  (SELECT MAX(id) FROM public.users)
+);
+```
+
+Hope it helps. Thank you.

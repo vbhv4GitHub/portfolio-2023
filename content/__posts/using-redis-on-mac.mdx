@@ -1,0 +1,67 @@
+---
+title: Using Redis on Mac
+date: 2023-04-16
+description: Quick cli commands to manage redis on your mac
+tags: ['redis', 'mac', 'homebrew']
+---
+
+**Prerequisite:** Have `brew` installed on your macbook.
+
+### Install redis using homebrew
+
+```bash
+brew install redis
+```
+
+### Starting the redis using homebrew
+
+```bash
+brew services start redis
+```
+
+It will start redis and restart it on login.
+
+### Check status of redis using homebrew
+
+```bash
+brew services info redis
+```
+
+If the redis is running you'll get an output like below:
+
+```bash
+redis (homebrew.mxcl.redis)
+Running: ✔
+Loaded: ✔
+User: johnWick
+PID: 69875
+```
+
+### Connect to redis using homebrew
+
+```bash
+redis-cli
+```
+
+### Stop redis using homebrew
+
+```bash
+brew services stop redis
+```
+
+### Restart redis using homebrew
+
+```bash
+brew services restart redis
+```
+
+### Clear redis storage using homebrew
+
+```bash
+redis-cli flushall
+```
+
+**Reference:**
+[Redis official Docs](https://redis.io/docs/getting-started/installation/install-redis-on-mac-os/)
+
+Hope it was helpful. Thank you.
