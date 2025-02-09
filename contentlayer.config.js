@@ -1,5 +1,5 @@
 import rehypePrism from 'rehype-prism-plus';
-import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
+import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
