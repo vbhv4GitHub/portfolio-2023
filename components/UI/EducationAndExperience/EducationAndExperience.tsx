@@ -28,7 +28,7 @@ const TimelineItem = ({
       </div>
     </div>
   </div>
-));
+);
 
 export default function EducationAndExperience() {
   return (
