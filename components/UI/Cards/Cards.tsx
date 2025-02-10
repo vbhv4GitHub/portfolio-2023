@@ -8,7 +8,7 @@ const Cards = ({ posts }: Props) => {
   if (posts.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       {posts.map((post: Post) => (
         <div key={post.slug} className="w-full">
           <Card {...post} />

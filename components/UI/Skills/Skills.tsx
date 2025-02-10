@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 
 const skills = [
   {
@@ -17,14 +20,19 @@ const skills = [
     percentage: 82,
   },
   {
-    name: 'Typescript',
-    logo: '/assets/logos/typescript.png',
-    percentage: 78,
+    name: 'HapiJS',
+    logo: '/assets/logos/hapi-js.png',
+    percentage: 81,
   },
   {
     name: 'React',
     logo: '/assets/logos/react.png',
     percentage: 80,
+  },
+  {
+    name: 'Typescript',
+    logo: '/assets/logos/typescript.png',
+    percentage: 78,
   },
   {
     name: 'NextJS',
@@ -37,14 +45,9 @@ const skills = [
     percentage: 70,
   },
   {
-    name: 'HapiJS',
-    logo: '/assets/logos/hapi-js.png',
-    percentage: 81,
-  },
-  {
-    name: 'Postgres',
-    logo: '/assets/logos/postgres.png',
-    percentage: 55,
+    name: 'Material UI',
+    logo: '/assets/logos/material-ui.png',
+    percentage: 72,
   },
   {
     name: 'Tailwind',
@@ -52,15 +55,22 @@ const skills = [
     percentage: 65,
   },
   {
-    name: 'Material UI',
-    logo: '/assets/logos/material-ui.png',
-    percentage: 72,
+    name: 'Docker',
+    logo: '/assets/logos/docker.png',
+    percentage: 61,
   },
-];
+  {
+    name: 'Postgres',
+    logo: '/assets/logos/postgres.png',
+    percentage: 55,
+  },
+].sort((a, b) => b.percentage - a.percentage);
 
 export default function Skills() {
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+
   return (
-    <div className="grid max-w-3xl grid-cols-2 gap-8 mx-auto sm:grid-cols-3 md:grid-cols-4">
+    <div className="grid max-w-4xl grid-cols-2 gap-8 mx-auto sm:grid-cols-3 md:grid-cols-4">
       {skills.map(({ name, logo, percentage }) => {
         const color =
           percentage > 85
@@ -71,12 +81,37 @@ export default function Skills() {
             ? 'bg-yellow-500'
             : 'bg-red-500';
 
+        const isHovered = hoveredSkill === name;
+
         return (
-          <div key={logo} className="flex flex-col items-center">
-            <Image alt={name} src={logo} height={55} width={55} />
-            <p className="mt-2 mb-1 text-sm font-medium">{name}</p>
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div className={`h-2.5 rounded-full ${color}`} style={{ width: `${percentage}%` }}></div>
+          <div
+            key={logo}
+            className="flex flex-col items-center p-4 transition-transform duration-300 bg-gray-800 rounded-lg shadow-lg hover:scale-105"
+            onMouseEnter={() => setHoveredSkill(name)}
+            onMouseLeave={() => setHoveredSkill(null)}
+          >
+            <div className="relative">
+              <Image
+                alt={name}
+                src={logo}
+                height={65}
+                width={65}
+                className={`transition-transform duration-300 ${isHovered ? 'scale-110' : ''}`}
+              />
+              {isHovered && (
+                <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full text-2xl font-bold text-white">
+                  <span className="px-2 py-1 rounded bg-black/50">{percentage}%</span>
+                </div>
+              )}
+            </div>
+            <p className="mt-4 mb-2 text-sm font-medium">{name}</p>
+            <div className="w-full bg-gray-700 rounded-full h-2.5">
+              <div
+                className={`h-2.5 rounded-full ${color} transition-all duration-500 ease-out`}
+                style={{
+                  width: isHovered ? `${percentage}%` : '0%',
+                }}
+              />
             </div>
           </div>
         );
