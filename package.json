@@ -23,7 +23,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
-    "next": "^15.1.6",
+    "next": "^15.1.7",
     "next-contentlayer2": "^0.4.6",
     "next-sitemap": "^4.2.3",
     "react": "18.3.1",
