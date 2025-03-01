@@ -7,8 +7,6 @@ import { FaCalendarDay } from 'react-icons/fa6';
 import { allPosts } from '.contentlayer/generated';
 import { MDXContent } from 'components/MDXContent';
 import TagCapsule from 'components/UI/Components/TagCapsule';
-import InternalLink from 'components/UI/InternalLink/InternalLink';
-import ExternalLink from 'components/UI/ExternalLink/ExternalLink';
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -16,8 +14,6 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   if (!post) return {};
   return { title: post.title };
 }
-
-const components = { InternalLink, ExternalLink };
 
 export default async function Post(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
@@ -48,7 +44,7 @@ export default async function Post(props: { params: Promise<{ slug: string }> })
         </div>
       </div>
       <div className="mt-8 prose prose-invert">
-        <MDXContent components={components} code={cleanedPost.body.code} />
+        <MDXContent code={cleanedPost.body.code} />
       </div>
     </div>
   );
