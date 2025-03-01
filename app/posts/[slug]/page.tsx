@@ -44,7 +44,7 @@ export default async function Post(props: { params: Promise<{ slug: string }> })
         </div>
       </div>
       <div className="mt-8 prose prose-invert">
-        <MDXContent code={cleanedPost.body.code} />
+        {cleanedPost.body.code && <MDXContent code={cleanedPost.body.code} />}
       </div>
     </div>
   );
