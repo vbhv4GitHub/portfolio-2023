@@ -1,13 +1,22 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useMDXComponent } from 'next-contentlayer2/hooks';
+import InternalLink from 'components/UI/InternalLink/InternalLink';
+import ExternalLink from 'components/UI/ExternalLink/ExternalLink';
 
 type MDXContentProps = {
   code: string;
-  components: Record<string, React.ComponentType<any>>;
 };
 
-export function MDXContent({ code, components }: MDXContentProps) {
+const components = { InternalLink, ExternalLink };
+
+export function MDXContent({ code }: MDXContentProps) {
   const MDXComponent = useMDXComponent(code);
-  return <MDXComponent components={components} />;
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MDXComponent components={components} />
+    </Suspense>
+  );
 }

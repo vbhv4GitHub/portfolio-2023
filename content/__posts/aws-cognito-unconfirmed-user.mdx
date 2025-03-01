@@ -1,8 +1,8 @@
 ---
 title: Cognito User Stuck In UNCONFIRMED State
 date: 2022-06-19
-description: When a Cognito account is stuck in UNCOFIRMED state, cognito's signup and resendCode method throws an error.
-tags: ['AWS', 'Cognito', 'resendCode']
+description: When a Cognito account is stuck in UNCONFIRMED state, cognito's signup and resendCode method throws an error.
+tags: ['aws', 'cognito', 'resendCode']
 ---
 
 Imagine that a user signs up for your application using an email address that they do not own, such as someoneElse@gmail.com. During the registration process, the user provides additional information such as their organization name and full name. A verification code is sent to the email address provided during registration. Obviously this user would not, or at least should not be able to complete registration as user won't be able to provide the verification code.
@@ -30,9 +30,9 @@ To do this, you can create an AWS Lambda function that uses the Cognito API to l
 
 By implementing this solution, you can ensure that your users are able to sign up for your application using the same email address, even if they have closed the app before verifying their account.
 
-There is one more solution possible for this problem which I implemented on one of my project. It may not sound appropriate to you but might just do the job in a better way than deleting the Congito account itself.
+There is one more solution possible for this problem which I implemented on one of my project. It may not sound appropriate to you but might just do the job in a better way than deleting the Cognito account itself.
 
-When a user tries to signup on your app and if you get the `UsernameExistsException` error, you can check if the user's account is in UNCOFIRMED state or not.
+When a user tries to signup on your app and if you get the `UsernameExistsException` error, you can check if the user's account is in UNCONFIRMED state or not.
 
 The below example is for when users are to create account using phone number instead of email address, but the same can be applied for email address accounts as well.
 
@@ -65,6 +65,6 @@ if (verificationStatus) {
 
 This will send user a new verification code that the user can use to confirm account and then login successfully.
 
-PS: If you're sending the verification code to a completely new user, you may want to be sure of updating any of their attributes in Cognito if required. Or else, the new user's cognito account will have some of the attributes from the previous user who attempted to singup using a wrong email address or phone number.
+PS: If you're sending the verification code to a completely new user, you may want to be sure of updating any of their attributes in Cognito if required. Or else, the new user's cognito account will have some of the attributes from the previous user who attempted to signup using a wrong email address or phone number.
 
 Hope it was helpful. Thank you.

@@ -8,7 +8,7 @@ const SearchBox = () => {
         name="query"
         placeholder="Search a blog post"
         aria-label="Search a blog post"
-        className="w-full py-2 pl-4 pr-10 text-base text-gray-800 border border-gray-300 rounded-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="w-full py-2 pl-4 pr-10 text-base text-gray-300 border border-gray-300 rounded-full md:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
       />
       <button
         type="submit"
