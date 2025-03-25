@@ -18,7 +18,7 @@
     "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
-    "@next/bundle-analyzer": "^15.2.2",
+    "@next/bundle-analyzer": "^15.2.4",
     "@tailwindcss/postcss": "^4.0.14",
     "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
