@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.2.2",
-    "@tailwindcss/postcss": "^4.0.14",
+    "@tailwindcss/postcss": "^4.0.16",
     "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.13",
