@@ -22,7 +22,7 @@
     "@tailwindcss/postcss": "^4.1.12",
     "clsx": "^2.1.1",
     "cross-env": "^10.0.0",
-    "dayjs": "^1.11.13",
+    "dayjs": "^1.11.15",
     "lodash": "^4.17.21",
     "next": "^15.5.2",
     "next-contentlayer2": "^0.5.8",
