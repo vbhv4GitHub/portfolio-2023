@@ -1,5 +1,3 @@
-'use server';
-
 type Props = { link: string; text: string };
 
 const ExternalLink = ({ link, text }: Props) => {
