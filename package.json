@@ -36,7 +36,7 @@
     "@fullhuman/postcss-purgecss": "^8.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/lodash": "^4.17.24",
-    "@types/node": "25.8.0",
+    "@types/node": "25.9.0",
     "@types/react": "19.2.14",
     "autoprefixer": "^10.5.0",
     "eslint": "^10.3.0",
