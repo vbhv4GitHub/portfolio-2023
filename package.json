@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
-    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/lodash": "^4.17.24",
     "@types/node": "25.9.3",
     "@types/react": "19.2.17",
