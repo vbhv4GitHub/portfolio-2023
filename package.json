@@ -44,7 +44,7 @@
     "eslint-plugin-unused-imports": "^4.4.1",
     "postcss": "^8.5.20",
     "tailwindcss": "^4.3.1",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   },
   "overrides": {
     "next-contentlayer2": {
