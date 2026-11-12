@@ -33,7 +33,7 @@
     "rehype-prism-plus": "^2.0.2"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^8.0.0",
+    "@fullhuman/postcss-purgecss": "^9.1.0",
     "@tailwindcss/typography": "^0.5.20",
     "@types/lodash": "^4.17.27",
     "@types/node": "26.6.6",
